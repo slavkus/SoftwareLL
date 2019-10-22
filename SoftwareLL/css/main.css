@@ -1,0 +1,36 @@
+/* General settings */
+
+body {
+    font-family: calibri;
+    color: white;
+    background-image: url("../multimedia/background.jpg");
+    width: 80%;
+    margin-left: 10%;
+}
+
+nav {
+    margin-top: 7%;
+    margin-left: 15%;
+    width: 70%;
+}
+
+nav a {
+    color: white;
+    font-size: 18px;
+}
+
+h1 {
+    color: white;
+    text-align: center; 
+    font-family: Copperplate; 
+    font-size: 36px
+}
+
+.navigation {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: space-between;
+    list-style: none;
+}
+
