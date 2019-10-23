@@ -19,11 +19,12 @@
     </head>
     <body>
         <header style="font-weight:bold">
-            <h1 id="headerID">Home</h1>
+            <h1 id="headerID">SoftwareLL</h1>
         </header>
         <br>
         <nav>
-            <ul class="navigation">
+            <ul>
+                <li style="background-color: #007AA4;"><a href="ostalo/multimedija.html">Home</a></li>
                 <li><a href="ostalo/multimedija.html">Gallery</a></li>
                 <li><a href="ostalo/popis.html">Tables</a></li>   
                 <li><a href="obrasci/obrazac.html">Form</a></li> 
@@ -32,7 +33,7 @@
                 <li><a href="navigacijski.html">Navigational diagram</a></li> 
                 <li><a href="era.html">ERA model</a></li> 
             </ul>
-            <hr style="margin-left: 4%;">
+            <hr>
         </nav>
     </body>
 </html>
