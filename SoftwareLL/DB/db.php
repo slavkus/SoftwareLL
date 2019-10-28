@@ -1,65 +1,65 @@
 <?php
 
-class Baza {
+class DB {
 
-    const server = "localhost";
-    const korisnik = "WebDiP2018x093"; //korisnik i baza su isti
-    const lozinka = "admin_qibH";
-    const baza = "WebDiP2018x093";
+    const server = "http://softwarell.epizy.com";
+    const user = "epiz_24665850"; //korisnik i baza su isti
+    const password = "BtQY7SN5QQsi-7/";
+    const db = "epiz_24665850_SoftwareLLDB";
 
-    private $veza = null;
-    private $greska = '';
+    private $connection = null;
+    private $error = '';
 
-    function spojiDB() {
-        $this->veza = new mysqli(self::server, self::korisnik, self::lozinka, self::baza);
-        if ($this->veza->connect_errno) {
-            echo "Neuspješno spajanje na bazu: " . $this->veza->connect_errno . ", " .
-            $this->veza->connect_error;
-            $this->greska = $this->veza->connect_error;
+    function connectDB() {
+        $this->connection = new mysqli(self::server, self::user, self::password, self::db);
+        if ($this->connection->connect_errno) {
+            echo "Connecting unsuccessful: " . $this->connection->connect_errno . ", " .
+            $this->connection->connect_error;
+            $this->error = $this->connection->connect_error;
         }
-        $this->veza->set_charset("utf8");
-        if ($this->veza->connect_errno) {
-            echo "Neuspješno postavljanje znakova za bazu: " . $this->veza->connect_errno . ", " .
-            $this->veza->connect_error;
-            $this->greska = $this->veza->connect_error;
+        $this->connection->set_charset("utf8");
+        if ($this->connection->connect_errno) {
+            echo "Unsuccessful character setting: " . $this->connection->connect_errno . ", " .
+            $this->connection->connect_error;
+            $this->error = $this->connection->connect_error;
         }
-        return $this->veza;
+        return $this->connection;
     }
 
-    function zatvoriDB() {
-        $this->veza->close();
+    function closeDB() {
+        $this->connection->close();
     }
 
-    function selectDB($upit) {
-        $rezultat = $this->veza->query($upit);
-        if ($this->veza->connect_errno) {
-            echo "Greška kod upita: {$upit} - " . $this->veza->connect_errno . ", " .
-            $this->veza->connect_error;
-            $this->greska = $this->veza->connect_error;
+    function selectDB($query) {
+        $result = $this->connection->query($query);
+        if ($this->connection->connect_errno) {
+            echo "Query error: {$query} - " . $this->connection->connect_errno . ", " .
+            $this->connection->connect_error;
+            $this->error = $this->connection->connect_error;
         }
-        if (!$rezultat) {
-            $rezultat = null;
+        if (!$result) {
+            $result = null;
         }
-        return $rezultat;
+        return $result;
     }
 
-    function updateDB($upit, $skripta = '') {
-        $rezultat = $this->veza->query($upit);
-        if ($this->veza->connect_errno) {
-            echo "Greška kod upita: {$upit} - " . $this->veza->connect_errno . ", " .
-            $this->veza->connect_error;
-            $this->greska = $this->veza->connect_error;
+    function updateDB($query, $script = '') {
+        $result = $this->connection->query($query);
+        if ($this->connection->connect_errno) {
+            echo "Query error: {$query} - " . $this->connection->connect_errno . ", " .
+            $this->connection->connect_error;
+            $this->error = $this->connection->connect_error;
         } else {
-            if ($skripta != '') {
-                header("Location: $skripta");
+            if ($script != '') {
+                header("Location: $script");
             }
         }
 
-        return $rezultat;
+        return $result;
     }
     
-    function pogreskaDB() {
-        if ($this->greska != '') {
+    function errorDB() {
+        if ($this->error != '') {
             return true;
         } else {
             return false;

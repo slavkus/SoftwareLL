@@ -1,6 +1,6 @@
-//Prijava
+//Login
 
-var modal = document.getElementById('prijavaBtn');
+var modal = document.getElementById('modalLoginButton');
 
 window.onclick = function (event) {
     if (event.target == modal) {
