@@ -8,4 +8,12 @@ window.onclick = function (event) {
     }
 }
 
+var modalRegister = document.getElementById('modalRegisterButton');
+
+window.onclick = function (event) {
+    if (event.target == modalRegister) {
+        modalRegister.style.display = "none";
+    }
+}
+
 var odjava = document.getElementById('');
