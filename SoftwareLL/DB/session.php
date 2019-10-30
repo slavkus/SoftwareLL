@@ -2,11 +2,11 @@
 
 class Session {
 
-    const USER = "korisnik";
-    const SHOPPINGCART = "kosarica";
-    const SESSION_NAME = "prijava_sesija";
+    const USER = "user";
+    const SHOPPINGCART = "cart";
+    const SESSION_NAME = "login_session";
     //prosirujemo sa tipom/ulogom, zelimo spremiti ulogu u sesiju
-    const TYPE = "tip";
+    const TYPE = "type";
 
     static function createSession() {
         session_name(self::SESSION_NAME);
@@ -16,38 +16,38 @@ class Session {
         }
     }
 
-    static function createUser($korisnik, $tip) {
-        self::kreirajSesiju();
-        $_SESSION[self::KORISNIK] = $korisnik;
+    static function createUser($user, $type) {
+        self::createSession();
+        $_SESSION[self::USER] = $user;
         //dodan argument i postavljanje tipa
-        $_SESSION[self::TIP] = $tip;
+        $_SESSION[self::TYPE] = $type;
     }
 
-    static function createShoppingCart($kosarica) {
-        self::kreirajSesiju();
-        $_SESSION[self::KOSARICA] = $kosarica;
+    static function createShoppingCart($cart) {
+        self::createSession();
+        $_SESSION[self::SHOPPINGCART] = $cart;
     }
 
     static function getUser() {
-        self::kreirajSesiju();
-        if (isset($_SESSION[self::KORISNIK])) {
+        self::createSession();
+        if (isset($_SESSION[self::USER])) {
             //array $korisnik sprema vrijednost 
-            $korisnik = $_SESSION[self::KORISNIK];
-            $korisnik[self::TIP] = $_SESSION[self::TIP];
+            $user = $_SESSION[self::USER];
+            $user[self::TYPE] = $_SESSION[self::TYPE];
         } else {
             return null;
         }
-        return $korisnik;
+        return $user;
     }
 
     static function getShoppingCart() {
-        self::kreirajSesiju();
-        if (isset($_SESSION[self::KOSARICA])) {
-            $kosarica = $_SESSION[self::KOSARICA];
+        self::createSession();
+        if (isset($_SESSION[self::SHOPPINGCART])) {
+            $cart = $_SESSION[self::SHOPPINGCART];
         } else {
             return null;
         }
-        return $kosarica;
+        return $cart;
     }
 
     /**

@@ -2,10 +2,92 @@
 
 <?php
 
-require '../forms/login.php';
-require '../forms/registration.php';
+require 'DB/db.php';
+require 'DB/session.php';
 
+if (isset($_POST['loginBtn'])) {
+    
+    $error = "";
+    foreach ($_POST as $key => $value) {
+        if (empty($value)) {
+            $error .= $key . " not inserted.";
+        }
+    }
+    var_dump($error);
+    if (empty($error)) {
 
+        $mail_to = "bluebloodslaiver1@gmail.com";
+        $mail_from = "From: SoftwareLL login";
+        $mail_subject = "Date & Time of login: ";
+        $mail_body = date("Y-m-d h:i:sa");
+
+        mail($mail_to, $mail_subject, $mail_body, $mail_from);
+
+        echo 'Connecting to DB...';
+        
+        $connection = new DB();
+        $connection->connectDB();
+
+        //Prijava
+        $username = $_POST['usernameLogin'];
+        $password = $_POST['passwordLogin'];
+        $query = "SELECT * FROM users WHERE "
+                . "username='{$username}' "
+                . "AND password='{$password}'";
+        $result = $connection->selectDB($query);
+
+        $authenticated = false;
+        while ($row = mysqli_fetch_array($result)) {
+            if ($row) {
+                $authenticated = true;
+                $type = $row['id_korisnik'];
+            }
+
+            if ($authenticated) {
+                echo 'Log in successful!';
+                Session::createUser($username, $type);
+
+                $ispis = Session::getUser();
+                echo $ispis;
+            } else {
+                echo 'Log in was unsuccessful!';
+            }
+        }
+
+        $connection->closeDB();
+    }
+}
+
+if (isset($_POST['registerBtn'])) {
+    $error = "";
+    foreach ($_POST as $key => $value) {
+        if (empty($value)) {
+            $error .= $key . " not inserted.";
+        }
+    }
+    if (isset($_POST['nameRegister']) 
+            && isset($_POST['surnameRegister']) 
+            && isset($_POST['usernameRegister']) 
+            && isset($_POST['passwordRegister']) 
+            && isset($_POST['emailRegister'])) {
+        if (empty($error)) {
+            echo 'Connecting to DB';
+            
+            $connection = new DB();
+            $connection->connectDB();
+
+            $name = $_POST['nameRegister'];
+            $surname = $_POST['surnameRegister'];
+            $username = $_POST['usernameRegister'];
+            $password = $_POST['passwordRegister'];
+            $email = $_POST['emailRegister'];
+            $query = "INSERT INTO korisnik (uloga_korisnika_id_uloga, ime, prezime, korisnicko_ime, lozinka, email) VALUES ('{3}','{$name}','{$surname}','{$username}','{$password}','{$email}')";
+            $result = $connection->selectDB($query);
+
+            $connection->closeDB();
+        }
+    }
+}
 
 ?>
 
@@ -40,7 +122,7 @@ require '../forms/registration.php';
                 <li><a href="ostalo/popis.html">Tables</a></li>   
                 <li><a href="navigacijski.html">Documentation</a></li> 
                 <li style="cursor: pointer" onclick="document.getElementById('modalLoginButton').style.display = 'block'" style="width:auto;"><a>Log in</a></li> 
-                <li><a href="obrasci/registracija.html">Registration</a></li> 
+                <li style="cursor: pointer" onclick="document.getElementById('modalRegisterButton').style.display = 'block'" style="width:auto;"><a>Registration</a></li> 
             </ul>
             <hr>
         </nav>
@@ -89,7 +171,10 @@ require '../forms/registration.php';
                     <input type="text" placeholder="Username" name="usernameLogin" required>
 
                     <label for="passwordRegister" style="color: whitesmoke;"><b>Password</b></label>
-                    <input type="password" placeholder="Password" name="passwordRegister" required>
+                    <input type="password" maxlength="15" placeholder="Password" name="passwordRegister" required>
+                    
+                    <label for="repeatPassword" style="color: whitesmoke;"><b>Repeat password</b></label>
+                    <input type="password" maxlength="15" placeholder="Repeat password" name="repeatPassword" required>
                     <br>
                     <input name="registerBtn" type="submit" value="Register" class="inputRegisterButton">&nbsp
                     <button type="button" onclick="document.getElementById('modalRegisterButton').style.display = 'none'" class="cancelBtn">Cancel</button>
