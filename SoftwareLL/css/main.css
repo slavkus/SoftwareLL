@@ -37,16 +37,17 @@ li:nth-child(6){
     float: right;
 }
 
-li a:hover{
+li:hover{
     background-color: #007AA4;
 }
 
 nav {
-    margin-top: 2%;
+    margin-top: 1%;
     width: 100%;
 }
 
 a {
+    color: white;
     text-decoration: none;
 }
 
@@ -63,7 +64,7 @@ figcaption {
 }
 
 .footer {
-    margin-top: 20%;
+    margin-top: 25%;
     left: 0;
     bottom: 0;
     width: 100%;

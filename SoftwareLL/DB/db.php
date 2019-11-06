@@ -2,9 +2,9 @@
 
 class DB {
 
-    const server = "http://softwarell.epizy.com";
-    const user = "epiz_24665850"; //korisnik i baza su isti
-    const password = "BtQY7SN5QQsi-7/";
+    const server = "sql313.epizy.com";
+    const user = "epiz_24665850"; 
+    const password = "lr5j7Q5xSUU0uO";
     const db = "epiz_24665850_SoftwareLLDB";
 
     private $connection = null;

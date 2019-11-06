@@ -1,10 +1,10 @@
 //Login
 
-var modal = document.getElementById('modalLoginButton');
+var modalLogin = document.getElementById('modalLoginButton');
 
 window.onclick = function (event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
+    if (event.target == modalLogin) {
+        modalLogin.style.display = "none";
     }
 }
 
@@ -16,4 +16,4 @@ window.onclick = function (event) {
     }
 }
 
-var odjava = document.getElementById('');
+var logout = document.getElementById('');

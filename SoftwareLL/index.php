@@ -10,7 +10,7 @@ if (isset($_POST['loginBtn'])) {
     $error = "";
     foreach ($_POST as $key => $value) {
         if (empty($value)) {
-            $error .= $key . " not inserted.";
+            $error .= $key . " not inserted. \n";
         }
     }
     var_dump($error);
@@ -23,7 +23,7 @@ if (isset($_POST['loginBtn'])) {
 
         mail($mail_to, $mail_subject, $mail_body, $mail_from);
 
-        echo 'Connecting to DB...';
+        echo "Connecting to DB... \n";
         
         $connection = new DB();
         $connection->connectDB();
@@ -31,9 +31,9 @@ if (isset($_POST['loginBtn'])) {
         //Prijava
         $username = $_POST['usernameLogin'];
         $password = $_POST['passwordLogin'];
-        $query = "SELECT * FROM users WHERE "
-                . "username='{$username}' "
-                . "AND password='{$password}'";
+        $query = "SELECT * FROM korisnik WHERE "
+                . "korisnicko_ime='{$username}' "
+                . "AND lozinka='{$password}'";
         $result = $connection->selectDB($query);
 
         $authenticated = false;
@@ -44,13 +44,13 @@ if (isset($_POST['loginBtn'])) {
             }
 
             if ($authenticated) {
-                echo 'Log in successful!';
+                echo "Log in successful! \n";
                 Session::createUser($username, $type);
 
                 $ispis = Session::getUser();
                 echo $ispis;
             } else {
-                echo 'Log in was unsuccessful!';
+                echo "Log in was unsuccessful! \n";
             }
         }
 
@@ -71,7 +71,7 @@ if (isset($_POST['registerBtn'])) {
             && isset($_POST['passwordRegister']) 
             && isset($_POST['emailRegister'])) {
         if (empty($error)) {
-            echo 'Connecting to DB';
+            echo "Connecting to DB \n";
             
             $connection = new DB();
             $connection->connectDB();
@@ -81,7 +81,8 @@ if (isset($_POST['registerBtn'])) {
             $username = $_POST['usernameRegister'];
             $password = $_POST['passwordRegister'];
             $email = $_POST['emailRegister'];
-            $query = "INSERT INTO korisnik (uloga_korisnika_id_uloga, ime, prezime, korisnicko_ime, lozinka, email) VALUES ('{3}','{$name}','{$surname}','{$username}','{$password}','{$email}')";
+            $query = "INSERT INTO korisnik (uloga_korisnika_id_uloga, ime, prezime, "
+                    . "korisnicko_ime, lozinka, email) VALUES ('{3}','{$name}','{$surname}','{$username}','{$password}','{$email}')";
             $result = $connection->selectDB($query);
 
             $connection->closeDB();
@@ -135,13 +136,15 @@ if (isset($_POST['registerBtn'])) {
             <form class="modal-content animate" novalidate method="post" name="login" action="">
 
                 <div class="container">
-                    <label for="usernameLogin" style="color: whitesmoke;"><b>Username</b></label>
+                    <h2 style="color: gray">Login</h2>
+                    <label for="usernameLogin" style="color: gray;"><b>Username</b></label>
                     <input type="text" placeholder="Username" name="usernameLogin" required>
 
-                    <label for="passwordLogin" style="color: whitesmoke;"><b>Password</b></label>
+                    <label for="passwordLogin" style="color: gray;"><b>Password</b></label>
                     <input type="password" placeholder="Password" name="passwordLogin" required>
                     <br>
-                    <label style="color: whitesmoke"><input type="checkbox" checked="checked" name="rememberMeCheckbox"> Remember me</label>
+                    <label style="color: gray"> Remember me</label>
+                    <input type="checkbox" checked="checked" name="rememberMeCheckbox">
                     <br><br>
                     <input name="loginBtn" type="submit" value="Log in" class="inputLoginButton">&nbsp
                     <button type="button" onclick="document.getElementById('modalLoginButton').style.display = 'none'" class="cancelBtn">Cancel</button>
@@ -158,22 +161,23 @@ if (isset($_POST['registerBtn'])) {
             <form class="modal-content animate" novalidate method="post" name="register" action="">
 
                 <div class="container">
-                    <label for="nameRegister" style="color: whitesmoke;"><b>Name</b></label>
+                    <h2 style="color: gray">Registration</h2>
+                    <label for="nameRegister" style="color: gray;"><b>Name</b></label>
                     <input type="text" placeholder="Name" name="nameRegister" required>
                     
-                    <label for="surnameRegister" style="color: whitesmoke;"><b>Surname</b></label>
+                    <label for="surnameRegister" style="color: gray;"><b>Surname</b></label>
                     <input type="text" placeholder="Surname" name="surenameRegister" required>
                     
-                    <label for="emailRegister" style="color: whitesmoke;"><b>Email</b></label>
+                    <label for="emailRegister" style="color: gray;"><b>Email</b></label>
                     <input type="text" placeholder="Email" name="emailRegister" required>
                     
-                    <label for="usernameRegister" style="color: whitesmoke;"><b>Username</b></label>
+                    <label for="usernameRegister" style="color: gray;"><b>Username</b></label>
                     <input type="text" placeholder="Username" name="usernameLogin" required>
 
-                    <label for="passwordRegister" style="color: whitesmoke;"><b>Password</b></label>
+                    <label for="passwordRegister" style="color: gray;"><b>Password</b></label>
                     <input type="password" maxlength="15" placeholder="Password" name="passwordRegister" required>
                     
-                    <label for="repeatPassword" style="color: whitesmoke;"><b>Repeat password</b></label>
+                    <label for="repeatPassword" style="color: gray;"><b>Repeat password</b></label>
                     <input type="password" maxlength="15" placeholder="Repeat password" name="repeatPassword" required>
                     <br>
                     <input name="registerBtn" type="submit" value="Register" class="inputRegisterButton">&nbsp
