@@ -156,7 +156,7 @@ if (isset($_POST['registerBtn'])) {
         <!-- Registration form -->
         
         <!-- Modal -->
-        <div id="modalRegistrationButton" class="modal">
+        <div id="modalRegisterButton" class="modal">
             <!-- Modal Content -->
             <form class="modal-content animate" novalidate method="post" name="register" action="">
 
@@ -179,7 +179,7 @@ if (isset($_POST['registerBtn'])) {
                     
                     <label for="repeatPassword" style="color: gray;"><b>Repeat password</b></label>
                     <input type="password" maxlength="15" placeholder="Repeat password" name="repeatPassword" required>
-                    <br>
+                    <br><br>
                     <input name="registerBtn" type="submit" value="Register" class="inputRegisterButton">&nbsp
                     <button type="button" onclick="document.getElementById('modalRegisterButton').style.display = 'none'" class="cancelBtn">Cancel</button>
 
