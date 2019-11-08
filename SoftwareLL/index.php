@@ -48,9 +48,10 @@ if (isset($_POST['loginBtn'])) {
                 Session::createUser($username, $type);
 
                 $ispis = Session::getUser();
+                
                 echo $ispis;
             } else {
-                echo "Log in was unsuccessful! \n";
+                echo "Login was unsuccessfull";
             }
         }
 
@@ -108,6 +109,8 @@ if (isset($_POST['registerBtn'])) {
         <link href="css/main.css" 
               rel="stylesheet" type="text/css">
 
+        <script src="jquery-3.4.1.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script type="text/javascript" src="javascript/main_jscript.js">
         </script>
 
@@ -133,20 +136,21 @@ if (isset($_POST['registerBtn'])) {
         <!-- The Modal -->
         <div id="modalLoginButton" class="modal">
             <!-- Modal Content -->
-            <form class="modal-content animate" novalidate method="post" name="login" action="">
+            <form id="loginForm" class="modal-content animate" novalidate method="post" name="login" action="">
 
                 <div class="container">
                     <h2 style="color: gray">Login</h2>
                     <label for="usernameLogin" style="color: gray;"><b>Username</b></label>
-                    <input type="text" placeholder="Username" name="usernameLogin" required>
+                    <input id="usernameLogin" type="text" placeholder="Username" name="usernameLogin" required>
 
                     <label for="passwordLogin" style="color: gray;"><b>Password</b></label>
-                    <input type="password" placeholder="Password" name="passwordLogin" required>
+                    <input id="passwordLogin" type="password" placeholder="Password" name="passwordLogin" required>
                     <br>
                     <label style="color: gray"> Remember me</label>
                     <input type="checkbox" checked="checked" name="rememberMeCheckbox">
                     <br><br>
-                    <input name="loginBtn" type="submit" value="Log in" class="inputLoginButton">&nbsp
+                    <input name="loginBtn" type="submit" value="Log in" class="inputLoginButton" id="inputLoginButton">
+                    &nbsp
                     <button type="button" onclick="document.getElementById('modalLoginButton').style.display = 'none'" class="cancelBtn">Cancel</button>
 
                 </div>
@@ -180,7 +184,7 @@ if (isset($_POST['registerBtn'])) {
                     <label for="repeatPassword" style="color: gray;"><b>Repeat password</b></label>
                     <input type="password" maxlength="15" placeholder="Repeat password" name="repeatPassword" required>
                     <br><br>
-                    <input name="registerBtn" type="submit" value="Register" class="inputRegisterButton">&nbsp
+                    <input name="registerBtn" type="submit" value="Register" class="inputRegisterButton" id="inputRegisterButton">&nbsp
                     <button type="button" onclick="document.getElementById('modalRegisterButton').style.display = 'none'" class="cancelBtn">Cancel</button>
 
                 </div>
