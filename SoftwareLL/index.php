@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 
 <?php
-
 require 'DB/db.php';
 require 'DB/session.php';
 
 if (isset($_POST['loginBtn'])) {
-    
+
     $error = "";
     foreach ($_POST as $key => $value) {
         if (empty($value)) {
@@ -24,7 +23,7 @@ if (isset($_POST['loginBtn'])) {
         mail($mail_to, $mail_subject, $mail_body, $mail_from);
 
         echo "Connecting to DB... \n";
-        
+
         $connection = new DB();
         $connection->connectDB();
 
@@ -48,7 +47,7 @@ if (isset($_POST['loginBtn'])) {
                 Session::createUser($username, $type);
 
                 $ispis = Session::getUser();
-                
+
                 echo $ispis;
             } else {
                 echo "Login was unsuccessfull";
@@ -66,31 +65,25 @@ if (isset($_POST['registerBtn'])) {
             $error .= $key . " not inserted.";
         }
     }
-    if (isset($_POST['nameRegister']) 
-            && isset($_POST['surnameRegister']) 
-            && isset($_POST['usernameRegister']) 
-            && isset($_POST['passwordRegister']) 
-            && isset($_POST['emailRegister'])) {
-        if (empty($error)) {
-            echo "Connecting to DB \n";
-            
-            $connection = new DB();
-            $connection->connectDB();
+    var_dump($error);
+    if (empty($error)) {
 
-            $name = $_POST['nameRegister'];
-            $surname = $_POST['surnameRegister'];
-            $username = $_POST['usernameRegister'];
-            $password = $_POST['passwordRegister'];
-            $email = $_POST['emailRegister'];
-            $query = "INSERT INTO korisnik (uloga_korisnika_id_uloga, ime, prezime, "
-                    . "korisnicko_ime, lozinka, email) VALUES ('{3}','{$name}','{$surname}','{$username}','{$password}','{$email}')";
-            $result = $connection->selectDB($query);
+        echo "Connecting to DB \n";
+        $connection = new DB();
+        $connection->connectDB();
 
-            $connection->closeDB();
-        }
+        $name = $_POST['nameRegister'];
+        $surname = $_POST['surnameRegister'];
+        $username = $_POST['usernameRegister'];
+        $password = $_POST['passwordRegister'];
+        $email = $_POST['emailRegister'];
+        $query = "INSERT INTO korisnik (ime, prezime, "
+                . "korisnicko_ime, lozinka, email) VALUES ('{$name}','{$surname}','{$username}','{$password}','{$email}')";
+        $result = $connection->selectDB($query);
+
+        $connection->closeDB();
     }
 }
-
 ?>
 
 
@@ -156,9 +149,9 @@ if (isset($_POST['registerBtn'])) {
                 </div>
             </form>
         </div>
-        
+
         <!-- Registration form -->
-        
+
         <!-- Modal -->
         <div id="modalRegisterButton" class="modal">
             <!-- Modal Content -->
@@ -167,22 +160,22 @@ if (isset($_POST['registerBtn'])) {
                 <div class="container">
                     <h2 style="color: gray">Registration</h2>
                     <label for="nameRegister" style="color: gray;"><b>Name</b></label>
-                    <input type="text" placeholder="Name" name="nameRegister" required>
-                    
+                    <input type="text" placeholder="Name" name="nameRegister" id="nameRegister" required>
+
                     <label for="surnameRegister" style="color: gray;"><b>Surname</b></label>
-                    <input type="text" placeholder="Surname" name="surenameRegister" required>
-                    
+                    <input type="text" placeholder="Surname" name="surenameRegister" id="surnameRegister" required>
+
                     <label for="emailRegister" style="color: gray;"><b>Email</b></label>
-                    <input type="text" placeholder="Email" name="emailRegister" required>
-                    
+                    <input type="text" placeholder="Email" name="emailRegister" id="emailRegister" required>
+
                     <label for="usernameRegister" style="color: gray;"><b>Username</b></label>
-                    <input type="text" placeholder="Username" name="usernameLogin" required>
+                    <input type="text" placeholder="Username" name="usernameRegister" id="usernameRegister" required>
 
                     <label for="passwordRegister" style="color: gray;"><b>Password</b></label>
-                    <input type="password" maxlength="15" placeholder="Password" name="passwordRegister" required>
-                    
+                    <input type="password" maxlength="15" placeholder="Password" name="passwordRegister" id="passwordRegister" required>
+
                     <label for="repeatPassword" style="color: gray;"><b>Repeat password</b></label>
-                    <input type="password" maxlength="15" placeholder="Repeat password" name="repeatPassword" required>
+                    <input type="password" maxlength="15" placeholder="Repeat password" name="repeatPassword" id="repeatPassRegister" required>
                     <br><br>
                     <input name="registerBtn" type="submit" value="Register" class="inputRegisterButton" id="inputRegisterButton">&nbsp
                     <button type="button" onclick="document.getElementById('modalRegisterButton').style.display = 'none'" class="cancelBtn">Cancel</button>

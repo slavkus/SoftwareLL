@@ -1,20 +1,51 @@
-$(document).ready(function(){
+//Register & Login Checkups
+//Javascript/Jquery attempt
 
-//Login
+$(document).ready(function () {
+    $("#modalLoginButton").click(function () {
+        $("#inputLoginButton").prop('disabled', false);
+    });
+    $("#modalRegisterButton").click(function (){
+        $("#inputRegisterButton").prop('disabled', false);
+    });
+    $("#inputLoginButton").click(function () {
+        if ($("#usernameLogin").val().length > 0 && $("#passwordLogin").val().length > 0) {
+            $("#inputLoginButton").prop('disabled', false);
+        } else {
+            $("#inputLoginButton").prop('disabled', true);
+            $("#inputLoginButton").prop('color', 'gray');
+            alert("Please, fill the fields to login.");
+        }
+    });
+    $("#inputRegisterButton").click(function () {
+        if ($("#nameRegister").val().length > 0 &&
+                $("#surnameRegister").val().length > 0 &&
+                $("#emailRegister").val().length > 0 &&
+                $("#usernameRegister").val().length > 0 &&
+                $("#passwordRegister").val().length > 0 &&
+                $("#repeatPassRegister").val().length > 0) {
 
-var loginSubmit = document.getElementById('inputLoginButton');
+            $("#inputRegisterButton").prop('disabled', false);
+        } else {
+            $("#inputRegisterButton").prop('disabled', true);
+            $("#inputRegisterButton").prop('color', 'gray');
+            alert("Please fill all fields to register.");
+        }
+    });
+});
+
+
+//Login modal animation
+
 var modalLogin = document.getElementById('modalLoginButton');
 
 window.onclick = function (event) {
     if (event.target == modalLogin) {
         modalLogin.style.display = "none";
     }
-    if (event.target == loginSubmit){
-        testLogin();
-    }
 }
 
-//Register
+//Register modal animation
 
 var modalRegister = document.getElementById('modalRegisterButton');
 
@@ -23,26 +54,3 @@ window.onclick = function (event) {
         modalRegister.style.display = "none";
     }
 }
-
-//Register & Login Checkups
-//Javascript attempt
-
-function testLogin() {
-    var username = parseInt(document.getElementById('usernameLogin').value);
-    var password = parseInt(document.getElementById('passwordLogin').value);
-    if (username.length > 0 && password.length > 0) {
-        document.getElementById('inputLoginButton').disabled = false;
-    } else {
-        document.getElementById('inputLoginButton').disabled = true;
-        alert("Please, fill the fields to login.");
-    }
-}
-
-
-function testRegister() {
-    var usernameCount = parseInt(document.getElementById('usernameLogin').length);
-    var passwordCount = parseInt(document.getElementById('passwordLogin').length);
-
-}
-
-});
