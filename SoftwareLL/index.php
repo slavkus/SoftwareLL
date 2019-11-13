@@ -144,7 +144,7 @@ if (isset($_POST['registerBtn'])) {
                     <br><br>
                     <input name="loginBtn" type="submit" value="Log in" class="inputLoginButton" id="inputLoginButton">
                     &nbsp
-                    <button type="button" onclick="document.getElementById('modalLoginButton').style.display = 'none'" class="cancelBtn">Cancel</button>
+                    <button type="button" onclick="document.getElementById('modalLoginButton').style.display = 'none'" class="cancelBtn" id="cancelBtn">Cancel</button>
 
                 </div>
             </form>
@@ -155,7 +155,7 @@ if (isset($_POST['registerBtn'])) {
         <!-- Modal -->
         <div id="modalRegisterButton" class="modal">
             <!-- Modal Content -->
-            <form class="modal-content animate" novalidate method="post" name="register" action="">
+            <form class="modal-content animate" novalidate method="post" name="register" id="modalRegisterForm" action="">
 
                 <div class="container">
                     <h2 style="color: gray">Registration</h2>
@@ -166,7 +166,7 @@ if (isset($_POST['registerBtn'])) {
                     <input type="text" placeholder="Surname" name="surenameRegister" id="surnameRegister" required>
 
                     <label for="emailRegister" style="color: gray;"><b>Email</b></label>
-                    <input type="text" placeholder="Email" name="emailRegister" id="emailRegister" required>
+                    <input type="email" placeholder="Email" name="emailRegister" id="emailRegister" required>
 
                     <label for="usernameRegister" style="color: gray;"><b>Username</b></label>
                     <input type="text" placeholder="Username" name="usernameRegister" id="usernameRegister" required>
@@ -178,7 +178,7 @@ if (isset($_POST['registerBtn'])) {
                     <input type="password" maxlength="15" placeholder="Repeat password" name="repeatPassword" id="repeatPassRegister" required>
                     <br><br>
                     <input name="registerBtn" type="submit" value="Register" class="inputRegisterButton" id="inputRegisterButton">&nbsp
-                    <button type="button" onclick="document.getElementById('modalRegisterButton').style.display = 'none'" class="cancelBtn">Cancel</button>
+                    <button type="button" onclick="document.getElementById('modalRegisterButton').style.display = 'none'" class="cancelBtn" id="cancelBtn">Cancel</button>
 
                 </div>
             </form>
