@@ -12,7 +12,7 @@ if (isset($_POST['loginBtn'])) {
             $error .= $key . " not inserted. \n";
         }
     }
-    var_dump($error);
+    //var_dump($error);
     if (empty($error)) {
 
         $mail_to = "bluebloodslaiver1@gmail.com";
@@ -22,7 +22,7 @@ if (isset($_POST['loginBtn'])) {
 
         mail($mail_to, $mail_subject, $mail_body, $mail_from);
 
-        echo "Connecting to DB... \n";
+        //echo "Connecting to DB... \n";
 
         $connection = new DB();
         $connection->connectDB();
@@ -47,7 +47,9 @@ if (isset($_POST['loginBtn'])) {
                 Session::createUser($username, $type);
 
                 $ispis = Session::getUser();
-
+                
+                echo '<script type="text/javascript">$(document).ready(function () { ShowLogout(); });</script>';
+                
                 echo $ispis;
             } else {
                 echo "Login was unsuccessfull";
@@ -65,10 +67,10 @@ if (isset($_POST['registerBtn'])) {
             $error .= $key . " not inserted.";
         }
     }
-    var_dump($error);
+    //var_dump($error);
     if (empty($error)) {
 
-        echo "Connecting to DB \n";
+        //echo "Connecting to DB \n";
         $connection = new DB();
         $connection->connectDB();
 
@@ -114,12 +116,18 @@ if (isset($_POST['registerBtn'])) {
         </header>
         <nav>
             <ul>
-                <li style="background-color: #007AA4;"><a href="ostalo/multimedija.html">Home</a></li>
-                <li><a href="ostalo/multimedija.html">Gallery</a></li>
-                <li><a href="ostalo/popis.html">Tables</a></li>   
-                <li><a href="navigacijski.html">Documentation</a></li> 
-                <li style="cursor: pointer" onclick="document.getElementById('modalLoginButton').style.display = 'block'" style="width:auto;"><a>Log in</a></li> 
-                <li style="cursor: pointer" onclick="document.getElementById('modalRegisterButton').style.display = 'block'" style="width:auto;"><a>Registration</a></li> 
+                <li style="background-color: #007AA4;"><a href="">Home</a></li>
+                <li style="cursor: pointer"><a href="">Gallery</a></li>
+                <li style="cursor: pointer"><a href="">Tables</a></li>   
+                <li style="cursor: pointer"><a href="">Documentation</a></li>
+                <?php if(!empty(Session::getUser())){
+                ?>
+                <li style="cursor: pointer" id="logoutLi"><a>Logout</a></li>
+                <?php } 
+                else { ?>
+                <li style="cursor: pointer" id="loginLi" class="loginLic" onclick="document.getElementById('modalLoginButton').style.display = 'block'" style="width:auto;"><a>Login</a></li> 
+                <li style="cursor: pointer" id="registrationLi" onclick="document.getElementById('modalRegisterButton').style.display = 'block'" style="width:auto;"><a>Registration</a></li>
+                <?php } ?>
             </ul>
             <hr>
         </nav>

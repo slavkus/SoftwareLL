@@ -65,4 +65,21 @@
      });
      }
      */
+    
+    /*
+     * Swap Login And Logout buttons attempt with jquery
+     * $("li:nth-child(5)").css({
+                "float": "right",
+                "visibility": "hidden"
+            });
+            $("li:nth-child(6)").css({
+                "float": "right",
+                "visibility": "hidden"
+            });
+            $("li:nth-child(7)").css({
+                "float": "right",
+                "visibility": "visible"
+            });
+     * 
+     */
 

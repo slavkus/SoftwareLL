@@ -3,7 +3,6 @@
 $(document).ready(function () {
 
     //All textbox checkup if empty
-
     $("#inputLoginButton").click(function (event) {
         var filledText = true;
         var filledPassword = true;
@@ -41,6 +40,7 @@ $(document).ready(function () {
             alert("Fill all of the fields.");
         } else {
             alert('Welcome!');
+
         }
     });
 
@@ -58,13 +58,14 @@ $(document).ready(function () {
                 });
             } else {
                 $(this).css({
-                    "border": "",
+                    "border": "1px solid green",
                     "background": ""
                 });
             }
         });
         $("#modalRegisterForm input[type=password]").each(function () {
-            if ($.trim($(this).val()) == '') {
+            if ($.trim($(this).val()) == '' ||
+                    ($("#passwordRegister").val() != $("#repeatPassRegister").val())) {
                 filledPassword = false;
                 $(this).css({
                     "border": "1px solid red",
@@ -72,21 +73,30 @@ $(document).ready(function () {
                 });
             } else {
                 $(this).css({
-                    "border": "",
+                    "border": "1px solid green",
                     "background": ""
                 });
             }
         });
+
         $("#modalRegisterForm input[type=email]").each(function () {
+            var emailRegex = /[A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,4}/igm;
             if ($.trim($(this).val()) == '') {
                 filledEmail = false;
                 $(this).css({
                     "border": "1px solid red",
                     "background": "#FFCECE"
                 });
+            } else if (!(emailRegex.test($.trim($(this).val())))) {
+                filledEmail = false;
+                $(this).css({
+                    "border": "1px solid red",
+                    "background": "#FFCECE"
+                });
+                alert('Incorrect email format.');
             } else {
                 $(this).css({
-                    "border": "",
+                    "border": "1px solid green",
                     "background": ""
                 });
             }
@@ -114,7 +124,7 @@ $(document).ready(function () {
                 "background": ""
             });
         });
-        
+
         $('input[type="email"]').each(function () {
             $(this).css({
                 "border": "",
@@ -122,7 +132,6 @@ $(document).ready(function () {
             });
         });
     });
-
 
 });
 
@@ -145,4 +154,16 @@ window.onclick = function (event) {
     if (event.target == modalRegister) {
         modalRegister.style.display = "none";
     }
+}
+
+function ShowLogout() {
+    $("#loginLi").hide();
+    $("#logoutLi").show();
+    $("#registrationLi").hide();
+}
+
+function ShowLogin() {
+    $("#logoutLi").hide();
+    $("#registrationLi").hide();
+    $("#loginLi").show();
 }

@@ -37,6 +37,10 @@ li:nth-child(6){
     float: right;
 }
 
+li:nth-child(7){
+    float: right;
+}
+
 li:hover{
     background-color: #007AA4;
 }
@@ -215,5 +219,4 @@ button:hover {
 
 .inputRegisterButton:hover{
     background-color: #007AA4;
-
 }
