@@ -156,14 +156,6 @@ window.onclick = function (event) {
     }
 }
 
-function ShowLogout() {
-    $("#loginLi").hide();
-    $("#logoutLi").show();
-    $("#registrationLi").hide();
-}
-
-function ShowLogin() {
-    $("#logoutLi").hide();
-    $("#registrationLi").hide();
-    $("#loginLi").show();
+function reload () {
+    window.location.replace('http://softwarell.epizy.com/');
 }

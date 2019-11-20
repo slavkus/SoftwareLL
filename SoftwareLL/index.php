@@ -47,9 +47,9 @@ if (isset($_POST['loginBtn'])) {
                 Session::createUser($username, $type);
 
                 $ispis = Session::getUser();
-                
+
                 echo '<script type="text/javascript">$(document).ready(function () { ShowLogout(); });</script>';
-                
+
                 echo $ispis;
             } else {
                 echo "Login was unsuccessfull";
@@ -120,13 +120,12 @@ if (isset($_POST['registerBtn'])) {
                 <li style="cursor: pointer"><a href="">Gallery</a></li>
                 <li style="cursor: pointer"><a href="">Tables</a></li>   
                 <li style="cursor: pointer"><a href="">Documentation</a></li>
-                <?php if(!empty(Session::getUser())){
-                ?>
-                <li style="cursor: pointer" id="logoutLi"><a>Logout</a></li>
-                <?php } 
-                else { ?>
-                <li style="cursor: pointer" id="loginLi" class="loginLic" onclick="document.getElementById('modalLoginButton').style.display = 'block'" style="width:auto;"><a>Login</a></li> 
-                <li style="cursor: pointer" id="registrationLi" onclick="document.getElementById('modalRegisterButton').style.display = 'block'" style="width:auto;"><a>Registration</a></li>
+                <?php if (!empty(Session::getUser())) {
+                    ?>
+                <li style="cursor: pointer" onclick="<?php Session::deleteSession(); ?> reload();" id="logoutLi"><a>Logout</a></li>
+                    <?php } else { ?>
+                    <li style="cursor: pointer" id="loginLi" class="loginLic" onclick="document.getElementById('modalLoginButton').style.display = 'block'" style="width:auto;"><a>Login</a></li> 
+                    <li style="cursor: pointer" id="registrationLi" onclick="document.getElementById('modalRegisterButton').style.display = 'block'" style="width:auto;"><a>Registration</a></li>
                 <?php } ?>
             </ul>
             <hr>
