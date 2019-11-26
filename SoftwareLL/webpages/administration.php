@@ -1,17 +1,12 @@
 <!DOCTYPE html>
 
 <?php
-require 'DB/db.php';
-require 'DB/session.php';
+require '../DB/db.php';
+require '../DB/session.php';
 Session::createSession();
-//Comment when done with sessions
-echo session_id();
-echo "<br>";
-echo session_name();
+$session_user = $_SESSION[Session::USER];
 
-$session_user = $_SESSION["USER"];
-
-echo $session_user . " Session user";
+echo $session_user . " Session user.";
 
 if (!empty($session_user)) {
     echo '<script type="text/javascript">$(document).ready(function () { ShowLogout(); });</script>';
@@ -53,11 +48,12 @@ if (!empty($session_user)) {
             }
 
             if ($authenticated) {
+                echo "Log in was successful! \n";
                 Session::createUser($username, $type);
                 $ispis = Session::getUser();
                 echo '<script type="text/javascript">$(document).ready(function () { ShowLogout(); });</script>';
-                echo $ispis . " logged in.";
-                
+
+                echo $ispis . "logged in.";
             } else {
                 echo "Login was unsuccessfull";
             }
@@ -98,34 +94,39 @@ if (isset($_POST['registerBtn'])) {
 
 <html>
     <head>
-        <title>Home</title>
+        <title>Administration</title>
         <meta charset = "UTF-8">
         <meta name = "viewport" content = "width=device-width, initial-scale=1.0">
 
-        <meta name="title" content="SoftwareLL">
+        <meta name="title" content="Administration">
         <meta name="author" content="Ivan Slavko Matić">
         <meta name="keywords" 
-              content="license, price, 
+              content="administrator, user, registered user, moderator, 
               company">
 
-        <link href="css/main.css" 
+        <link href="../css/main.css" 
               rel="stylesheet" type="text/css">
+
+        <!-- Datatables include -->
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
+
+        <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
 
         <script src="jquery-3.4.1.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-        <script type="text/javascript" src="javascript/main_jscript.js">
+        <script type="text/javascript" src="../javascript/main_jscript.js">
         </script>
 
     </head>
     <body>
         <header style="font-weight:bold">
-            <h1 id="headerID">Home</h1>
+            <h1 id="headerID">Administration</h1>
         </header>
         <nav>
             <ul>
-                <li style="background-color: #007AA4; cursor: pointer;"><a href="">Home</a></li>
+                <li style="cursor: pointer"><a href="../index.php">Home</a></li>
                 <li style="cursor: pointer"><a href="">Gallery</a></li>
-                <li style="cursor: pointer"><a href="webpages/administration.php">Administration</a></li>   
+                <li style="background-color: #007AA4; cursor: pointer"><a href="">Administration</a></li>   
                 <li style="cursor: pointer"><a href="">Documentation</a></li>
                 <?php if (!empty(Session::getUser())) {
                     ?>
@@ -198,16 +199,39 @@ if (isset($_POST['registerBtn'])) {
             </form>
         </div>
 
+        <div>
+            <table id="users_table">
+                <thead>
+                    <tr>
+                        <th>Name & Surname</th>
+                        <th>Email<th>
+                        <th>Username</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+
+                    </tr>
+                    <tr>
+
+                    </tr>
+                    <tr>
+
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
         <footer class="footer">
             <p><strong>Name & Surname: </strong>Ivan Slavko Matić</p>
             <p><strong>Last updated: </strong>Listopad, 2019. </p>
             <address><strong>Email: </strong><a href="mailto:bluebloodslaiver1@gmail.com">bluebloodslaiver1@gmail.com</a></address>
             <figure id="footer">
                 <a href="http://validator.w3.org/#validate_by_uri+with_options">
-                    <img src="multimedia/HTML5.png" 
+                    <img src="../multimedia/HTML5.png" 
                          alt="HTML5 validator" width="50" height="50"></a>
                 <a href="http://jigsaw.w3.org/css-validator/">
-                    <img src="multimedia/CSS3.png" 
+                    <img src="../multimedia/CSS3.png" 
                          alt="CSS validator" width="50" height="50"></a>
             </figure>
         </footer>

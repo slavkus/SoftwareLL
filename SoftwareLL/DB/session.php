@@ -31,7 +31,7 @@ class Session {
     static function getUser() {
         self::createSession();
         if (isset($_SESSION[self::USER])) {
-            //array $korisnik sprema vrijednost 
+            //array $user sprema vrijednost 
             $user = $_SESSION[self::USER];
             $user[self::TYPE] = $_SESSION[self::TYPE];
         } else {
@@ -49,8 +49,8 @@ class Session {
         }
         return $cart;
     }
-
-    /**
+    
+    /*
      * Odjavljuje korisnika tj. briše sesiju
      */
     static function deleteSession() {

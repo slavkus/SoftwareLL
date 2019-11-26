@@ -2,6 +2,8 @@
 
 $(document).ready(function () {
 
+    $('#users_table').DataTable();
+    
     //All textbox checkup if empty
     $("#inputLoginButton").click(function (event) {
         var filledText = true;
