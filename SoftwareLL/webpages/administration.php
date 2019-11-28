@@ -1,7 +1,7 @@
 <?php
 session_start();
+require '../DB/db.php';
 
-require 'DB/db.php';
 //Comment when done with sessions
 //echo session_id();
 //echo "<br>";
@@ -11,17 +11,8 @@ echo $_SESSION["user"] . " is now a session user.";
 //echo session_status();
 
 if (!empty($_SESSION["user"])) {
-    echo "<script src='javascript/jquery-3.4.1.min.js'></script>"
-    . "<script type='text/javascript'>"
-    . "$(document).ready(function () {"
-            . " showLogout(); });"
-            . "</script>";
+    echo '<script type="text/javascript">$(document).ready(function () { ShowLogout(); });</script>';
 } else {
-    echo "<script src='javascript/jquery-3.4.1.min.js'></script>"
-    . "<script type='text/javascript'>"
-    . "$(document).ready(function () {"
-            . " showLoginRegistration(); });"
-            . "</script>";
     $error = "";
     foreach ($_POST as $key => $value) {
         if (empty($value)) {
@@ -54,13 +45,9 @@ if (!empty($_SESSION["user"])) {
                 $_SESSION["user"] = $username;
                 $_SESSION["type"] = $type;
                 $ispis = $_SESSION["user"];
-                echo "<script src='javascript/jquery-3.4.1.min.js'></script>"
-                . "<script type='text/javascript'>"
-                . "$(document).ready(function () {"
-                        . " showLogout();"
-                        . " reload(); });"
-                        . "</script>";
-                echo "<br>" . $ispis . " logged in.";
+                echo '<script type="text/javascript">$(document).ready(function () { ShowLogout(); });</script>';
+
+                echo $ispis . "logged in.";
             } else {
                 echo "Login was unsuccessfull";
             }
@@ -69,8 +56,6 @@ if (!empty($_SESSION["user"])) {
         $connection->closeDB();
     }
 }
-
-
 
 if (isset($_POST['registerBtn'])) {
     $error = "";
@@ -99,43 +84,44 @@ if (isset($_POST['registerBtn'])) {
     }
 }
 ?>
+
 <!DOCTYPE html>
 
 <html>
     <head>
-        <title>Home</title>
+        <title>Administration</title>
         <meta charset = "UTF-8">
         <meta name = "viewport" content = "width=device-width, initial-scale=1.0">
 
-        <meta name="title" content="SoftwareLL">
+        <meta name="title" content="Administration">
         <meta name="author" content="Ivan Slavko Matić">
         <meta name="keywords" 
-              content="license, price, 
+              content="administrator, user, registered user, moderator, 
               company">
-        <script src="javascript/jquery-3.4.1.min.js"></script>
+        <script src="../javascript/jquery-3.4.1.min.js"></script>
         <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
         <script type="text/javascript" src="../javascript/main_jscript.js"></script>
 
-        <link href="css/main.css" rel="stylesheet" type="text/css">
+        <link href="../css/main.css" rel="stylesheet" type="text/css">
         <!-- Datatables include -->
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
+
 
 
     </head>
     <body>
         <header style="font-weight:bold">
-            <h1 id="headerID">Home</h1>
+            <h1 id="headerID">Administration</h1>
         </header>
         <nav>
             <ul>
-                <li style="background-color: #007AA4; cursor: pointer;"><a href="">Home</a></li>
+                <li style="cursor: pointer"><a href="../index.php">Home</a></li>
                 <li style="cursor: pointer"><a href="">Gallery</a></li>
-                <li style="cursor: pointer"><a href="webpages/administration.php">Administration</a></li>   
+                <li style="background-color: #007AA4; cursor: pointer"><a href="">Administration</a></li>   
                 <li style="cursor: pointer"><a href="">Documentation</a></li>
-                <li style="cursor: pointer" id="logoutLi"><a href="DB/logout.php">Logout</a></li>
+                <li style="cursor: pointer" id="logoutLi"><a href="../DB/logout.php">Logout</a></li>
                 <li style="cursor: pointer" id="loginLi" class="loginLic" onclick="document.getElementById('modalLoginButton').style.display = 'block'" style="width:auto;"><a>Login</a></li> 
                 <li style="cursor: pointer" id="registrationLi" onclick="document.getElementById('modalRegisterButton').style.display = 'block'" style="width:auto;"><a>Registration</a></li>
-
             </ul>
             <hr>
         </nav>
@@ -200,16 +186,39 @@ if (isset($_POST['registerBtn'])) {
             </form>
         </div>
 
+        <div>
+            <table id="users_table">
+                <thead>
+                    <tr>
+                        <th>Name & Surname</th>
+                        <th>Email<th>
+                        <th>Username</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+
+                    </tr>
+                    <tr>
+
+                    </tr>
+                    <tr>
+
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
         <footer class="footer">
             <p><strong>Name & Surname: </strong>Ivan Slavko Matić</p>
             <p><strong>Last updated: </strong>Listopad, 2019. </p>
             <address><strong>Email: </strong><a href="mailto:bluebloodslaiver1@gmail.com">bluebloodslaiver1@gmail.com</a></address>
             <figure id="footer">
                 <a href="http://validator.w3.org/#validate_by_uri+with_options">
-                    <img src="multimedia/HTML5.png" 
+                    <img src="../multimedia/HTML5.png" 
                          alt="HTML5 validator" width="50" height="50"></a>
                 <a href="http://jigsaw.w3.org/css-validator/">
-                    <img src="multimedia/CSS3.png" 
+                    <img src="../multimedia/CSS3.png" 
                          alt="CSS validator" width="50" height="50"></a>
             </figure>
         </footer>
