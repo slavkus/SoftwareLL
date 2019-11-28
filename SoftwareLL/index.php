@@ -1,21 +1,18 @@
-<!DOCTYPE html>
-
 <?php
+session_start();
+
 require 'DB/db.php';
-require 'DB/session.php';
-Session::createSession();
 //Comment when done with sessions
 echo session_id();
 echo "<br>";
 echo session_name();
+echo "<br>";
+echo $_SESSION["user"] . " is now a session user.";
+echo session_status();
 
-$session_user = $_SESSION["USER"];
-
-echo $session_user . " Session user";
-
-if (!empty($session_user)) {
+if (!empty($_SESSION["user"])) {
     echo '<script type="text/javascript">$(document).ready(function () { ShowLogout(); });</script>';
-} else if (isset($_POST['loginBtn'])) {
+} else {
     $error = "";
     foreach ($_POST as $key => $value) {
         if (empty($value)) {
@@ -24,14 +21,6 @@ if (!empty($session_user)) {
     }
     //var_dump($error);
     if (empty($error)) {
-
-        $mail_to = "bluebloodslaiver1@gmail.com";
-        $mail_from = "From: SoftwareLL login";
-        $mail_subject = "Date & Time of login: ";
-        $mail_body = date("Y-m-d h:i:sa");
-
-        mail($mail_to, $mail_subject, $mail_body, $mail_from);
-
         //echo "Connecting to DB... \n";
 
         $connection = new DB();
@@ -53,11 +42,11 @@ if (!empty($session_user)) {
             }
 
             if ($authenticated) {
-                Session::createUser($username, $type);
-                $ispis = Session::getUser();
+                $_SESSION["user"] = $username;
+                $_SESSION["type"] = $type;
+                $ispis = $_SESSION["user"];
                 echo '<script type="text/javascript">$(document).ready(function () { ShowLogout(); });</script>';
-                echo $ispis . " logged in.";
-                
+                echo "<br>" . $ispis . " logged in.";
             } else {
                 echo "Login was unsuccessfull";
             }
@@ -66,6 +55,8 @@ if (!empty($session_user)) {
         $connection->closeDB();
     }
 }
+
+
 
 if (isset($_POST['registerBtn'])) {
     $error = "";
@@ -94,7 +85,7 @@ if (isset($_POST['registerBtn'])) {
     }
 }
 ?>
-
+<!DOCTYPE html>
 
 <html>
     <head>
@@ -107,14 +98,14 @@ if (isset($_POST['registerBtn'])) {
         <meta name="keywords" 
               content="license, price, 
               company">
+        <script src="javascript/jquery-3.4.1.min.js"></script>
+        <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+        <script type="text/javascript" src="../javascript/main_jscript.js"></script>
 
-        <link href="css/main.css" 
-              rel="stylesheet" type="text/css">
+        <link href="css/main.css" rel="stylesheet" type="text/css">
+        <!-- Datatables include -->
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
 
-        <script src="jquery-3.4.1.min.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-        <script type="text/javascript" src="javascript/main_jscript.js">
-        </script>
 
     </head>
     <body>
@@ -127,13 +118,10 @@ if (isset($_POST['registerBtn'])) {
                 <li style="cursor: pointer"><a href="">Gallery</a></li>
                 <li style="cursor: pointer"><a href="webpages/administration.php">Administration</a></li>   
                 <li style="cursor: pointer"><a href="">Documentation</a></li>
-                <?php if (!empty(Session::getUser())) {
-                    ?>
-                    <li style="cursor: pointer" onclick="<?php Session::deleteSession(); ?> reload();" id="logoutLi"><a>Logout</a></li>
-                <?php } else { ?>
-                    <li style="cursor: pointer" id="loginLi" class="loginLic" onclick="document.getElementById('modalLoginButton').style.display = 'block'" style="width:auto;"><a>Login</a></li> 
-                    <li style="cursor: pointer" id="registrationLi" onclick="document.getElementById('modalRegisterButton').style.display = 'block'" style="width:auto;"><a>Registration</a></li>
-                <?php } ?>
+                <li style="cursor: pointer" id="logoutLi"><a>Logout</a></li>
+                <li style="cursor: pointer" id="loginLi" class="loginLic" onclick="document.getElementById('modalLoginButton').style.display = 'block'" style="width:auto;"><a>Login</a></li> 
+                <li style="cursor: pointer" id="registrationLi" onclick="document.getElementById('modalRegisterButton').style.display = 'block'" style="width:auto;"><a>Registration</a></li>
+
             </ul>
             <hr>
         </nav>
