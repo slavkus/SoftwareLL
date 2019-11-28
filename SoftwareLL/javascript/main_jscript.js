@@ -40,9 +40,6 @@ $(document).ready(function () {
         if (filledText == false || filledPassword == false) {
             event.preventDefault();
             alert("Fill all of the fields.");
-        } else {
-            alert('Welcome!');
-
         }
     });
 
@@ -160,4 +157,16 @@ window.onclick = function (event) {
 
 function reload () {
     window.location.replace('http://softwarell.epizy.com/');
+}
+
+function showLogout () {
+    $("#loginLi").hide();
+    $("#registrationLi").hide();
+    $("#logoutLi").show();
+}
+
+function showLoginRegistration () {
+    $("#loginLi").show();
+    $("#registrationLi").show();
+    $("#logoutLi").hide();
 }

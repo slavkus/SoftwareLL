@@ -3,16 +3,25 @@ session_start();
 
 require 'DB/db.php';
 //Comment when done with sessions
-echo session_id();
-echo "<br>";
-echo session_name();
-echo "<br>";
+//echo session_id();
+//echo "<br>";
+//echo session_name();
+//echo "<br>";
 echo $_SESSION["user"] . " is now a session user.";
-echo session_status();
+//echo session_status();
 
 if (!empty($_SESSION["user"])) {
-    echo '<script type="text/javascript">$(document).ready(function () { ShowLogout(); });</script>';
+    echo "<script src='javascript/jquery-3.4.1.min.js'></script>"
+    . "<script type='text/javascript'>"
+    . "$(document).ready(function () {"
+            . " showLogout(); });"
+            . "</script>";
 } else {
+    echo "<script src='javascript/jquery-3.4.1.min.js'></script>"
+    . "<script type='text/javascript'>"
+    . "$(document).ready(function () {"
+            . " showLoginRegistration(); });"
+            . "</script>";
     $error = "";
     foreach ($_POST as $key => $value) {
         if (empty($value)) {
@@ -45,7 +54,12 @@ if (!empty($_SESSION["user"])) {
                 $_SESSION["user"] = $username;
                 $_SESSION["type"] = $type;
                 $ispis = $_SESSION["user"];
-                echo '<script type="text/javascript">$(document).ready(function () { ShowLogout(); });</script>';
+                echo "<script src='javascript/jquery-3.4.1.min.js'></script>"
+                . "<script type='text/javascript'>"
+                . "$(document).ready(function () {"
+                        . " showLogout();"
+                        . " reload(); });"
+                        . "</script>";
                 echo "<br>" . $ispis . " logged in.";
             } else {
                 echo "Login was unsuccessfull";
@@ -118,7 +132,7 @@ if (isset($_POST['registerBtn'])) {
                 <li style="cursor: pointer"><a href="">Gallery</a></li>
                 <li style="cursor: pointer"><a href="webpages/administration.php">Administration</a></li>   
                 <li style="cursor: pointer"><a href="">Documentation</a></li>
-                <li style="cursor: pointer" id="logoutLi"><a>Logout</a></li>
+                <li style="cursor: pointer" id="logoutLi"><a href="DB/logout.php">Logout</a></li>
                 <li style="cursor: pointer" id="loginLi" class="loginLic" onclick="document.getElementById('modalLoginButton').style.display = 'block'" style="width:auto;"><a>Login</a></li> 
                 <li style="cursor: pointer" id="registrationLi" onclick="document.getElementById('modalRegisterButton').style.display = 'block'" style="width:auto;"><a>Registration</a></li>
 

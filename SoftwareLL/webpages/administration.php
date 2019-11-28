@@ -3,12 +3,12 @@ session_start();
 require '../DB/db.php';
 
 //Comment when done with sessions
-echo session_id();
-echo "<br>";
-echo session_name();
-echo "<br>";
+//echo session_id();
+//echo "<br>";
+//echo session_name();
+//echo "<br>";
 echo $_SESSION["user"] . " is now a session user.";
-echo session_status();
+//echo session_status();
 
 if (!empty($_SESSION["user"])) {
     echo '<script type="text/javascript">$(document).ready(function () { ShowLogout(); });</script>';
@@ -119,7 +119,7 @@ if (isset($_POST['registerBtn'])) {
                 <li style="cursor: pointer"><a href="">Gallery</a></li>
                 <li style="background-color: #007AA4; cursor: pointer"><a href="">Administration</a></li>   
                 <li style="cursor: pointer"><a href="">Documentation</a></li>
-                <li style="cursor: pointer" id="logoutLi"><a>Logout</a></li>
+                <li style="cursor: pointer" id="logoutLi"><a href="../DB/logout.php">Logout</a></li>
                 <li style="cursor: pointer" id="loginLi" class="loginLic" onclick="document.getElementById('modalLoginButton').style.display = 'block'" style="width:auto;"><a>Login</a></li> 
                 <li style="cursor: pointer" id="registrationLi" onclick="document.getElementById('modalRegisterButton').style.display = 'block'" style="width:auto;"><a>Registration</a></li>
             </ul>
