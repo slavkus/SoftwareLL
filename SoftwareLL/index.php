@@ -47,7 +47,7 @@ if (!empty($_SESSION["user"])) {
         while ($row = mysqli_fetch_array($result)) {
             if ($row) {
                 $authenticated = true;
-                $type = $row['id_korisnik'];
+                $type = $row['uloga_korisnika_id_uloga'];
             }
 
             if ($authenticated) {
@@ -60,7 +60,6 @@ if (!empty($_SESSION["user"])) {
                         . " showLogout();"
                         . " reload(); });"
                         . "</script>";
-                echo "<br>" . $ispis . " logged in.";
             } else {
                 echo "Login was unsuccessfull";
             }
@@ -69,8 +68,6 @@ if (!empty($_SESSION["user"])) {
         $connection->closeDB();
     }
 }
-
-
 
 if (isset($_POST['registerBtn'])) {
     $error = "";
@@ -91,10 +88,37 @@ if (isset($_POST['registerBtn'])) {
         $username = $_POST['usernameRegister'];
         $password = $_POST['passwordRegister'];
         $email = $_POST['emailRegister'];
-        $query = "INSERT INTO korisnik (ime, prezime, "
-                . "korisnicko_ime, lozinka, email) VALUES ('{$name}','{$surname}','{$username}','{$password}','{$email}')";
-        $result = $connection->selectDB($query);
 
+        $queryCheck = "SELECT * FROM korisnik WHERE "
+                . "korisnicko_ime='{$username}' "
+                . "AND lozinka='{$password}'";
+        $result = $connection->selectDB($queryCheck);
+
+        while ($row = mysqli_fetch_array($result)) {
+            if ($row) {
+                $userAuth = $row['korisnicko_ime'];
+                $emailAuth = $row['email'];
+                $type = $row['uloga_korisnika_id_uloga'];
+            }
+        }
+
+        if ($userAuth == $username) {
+            echo "<script type='text/javascript'>"
+            . "alert('There is already a user registered under that username')"
+            . "</script>";
+        } else if ($email == $emailAuth) {
+            echo "<script type='text/javascript'>"
+            . "alert('There is already a user registered under that email')"
+            . "</script>";
+        } else {
+            $query = "INSERT INTO korisnik (ime, prezime, "
+                    . "korisnicko_ime, lozinka, email) VALUES ('{$name}','{$surname}','{$username}','{$password}','{$email}')";
+            $result = $connection->selectDB($query);
+            
+            echo "<script type='text/javascript'>"
+            . "alert('Thank you for registering!')"
+            . "</script>";
+        }
         $connection->closeDB();
     }
 }

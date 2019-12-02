@@ -11,8 +11,52 @@ echo $_SESSION["user"] . " is now a session user.";
 //echo session_status();
 
 if (!empty($_SESSION["user"])) {
-    echo '<script type="text/javascript">$(document).ready(function () { ShowLogout(); });</script>';
+    echo "<script src='../javascript/jquery-3.4.1.min.js'></script>"
+    . "<script type='text/javascript'>"
+    . "$(document).ready(function () {"
+    . " showLogout(); });"
+    . "</script>";
+
+    if (($_SESSION["type"]) == 4) {
+        echo "<script src='../javascript/jquery-3.4.1.min.js'></script>"
+        . "<script type='text/javascript'>"
+        . "$(document).ready(function () {"
+        . " showAdminData(); });"
+        . "</script>";
+
+        $connection = new DB();
+        $connection->connectDB();
+
+        $query = "SELECT id_korisnik, email, korisnicko_ime FROM korisnik";
+        $result = $connection->selectDB($query);
+
+        $data = array();
+
+        while ($row = mysqli_fetch_array($result)) {
+            $id = $row['id_korisnik'];
+            $email = $row['email'];
+            $user = $row['korisnicko_ime'];
+            $data[] = array('id' => $id, 'email' => $email, 'username' => $user);
+        }
+
+        $fp = fopen('../javascript/users.json', 'w');
+        fwrite($fp, json_encode($data));
+        fclose($fp);
+    } else {
+        echo "<script src='../javascript/jquery-3.4.1.min.js'></script>"
+        . "<script type='text/javascript'>"
+        . "$(document).ready(function () {"
+        . " showAdminBlank(); });"
+        . "alert('Content locked. Please log in as administrator.');"
+        . "</script>";
+    }
 } else {
+    echo "<script src='../javascript/jquery-3.4.1.min.js'></script>"
+    . "<script type='text/javascript'>"
+    . "$(document).ready(function () {"
+    . " showLoginRegistration();"
+    . " showAdminBlank(); });"
+    . "</script>";
     $error = "";
     foreach ($_POST as $key => $value) {
         if (empty($value)) {
@@ -38,16 +82,19 @@ if (!empty($_SESSION["user"])) {
         while ($row = mysqli_fetch_array($result)) {
             if ($row) {
                 $authenticated = true;
-                $type = $row['id_korisnik'];
+                $type = $row['uloga_korisnika_id_uloga'];
             }
 
             if ($authenticated) {
                 $_SESSION["user"] = $username;
                 $_SESSION["type"] = $type;
                 $ispis = $_SESSION["user"];
-                echo '<script type="text/javascript">$(document).ready(function () { ShowLogout(); });</script>';
-
-                echo $ispis . "logged in.";
+                echo "<script src='../javascript/jquery-3.4.1.min.js'></script>"
+                . "<script type='text/javascript'>"
+                . "$(document).ready(function () {"
+                . " showLogout();"
+                . " reload(); });"
+                . "</script>";
             } else {
                 echo "Login was unsuccessfull";
             }
@@ -76,10 +123,37 @@ if (isset($_POST['registerBtn'])) {
         $username = $_POST['usernameRegister'];
         $password = $_POST['passwordRegister'];
         $email = $_POST['emailRegister'];
-        $query = "INSERT INTO korisnik (ime, prezime, "
-                . "korisnicko_ime, lozinka, email) VALUES ('{$name}','{$surname}','{$username}','{$password}','{$email}')";
-        $result = $connection->selectDB($query);
 
+        $queryCheck = "SELECT * FROM korisnik WHERE "
+                . "korisnicko_ime='{$username}' "
+                . "AND lozinka='{$password}'";
+        $result = $connection->selectDB($queryCheck);
+
+        while ($row = mysqli_fetch_array($result)) {
+            if ($row) {
+                $userAuth = $row['korisnicko_ime'];
+                $emailAuth = $row['email'];
+                $type = $row['uloga_korisnika_id_uloga'];
+            }
+        }
+
+        if ($userAuth == $username) {
+            echo "<script type='text/javascript'>"
+            . "alert('There is already a user registered under that username')"
+            . "</script>";
+        } else if ($email == $emailAuth) {
+            echo "<script type='text/javascript'>"
+            . "alert('There is already a user registered under that email')"
+            . "</script>";
+        } else {
+            $query = "INSERT INTO korisnik (ime, prezime, "
+                    . "korisnicko_ime, lozinka, email) VALUES ('{$name}','{$surname}','{$username}','{$password}','{$email}')";
+            $result = $connection->selectDB($query);
+            
+            echo "<script type='text/javascript'>"
+            . "alert('Thank you for registering!')"
+            . "</script>";
+        }
         $connection->closeDB();
     }
 }
@@ -105,8 +179,8 @@ if (isset($_POST['registerBtn'])) {
         <link href="../css/main.css" rel="stylesheet" type="text/css">
         <!-- Datatables include -->
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
-
-
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/select/1.3.1/css/select.dataTables.min.css">
+        <link rel="stylesheet" type="text/css" href="https://www.w3schools.com/lib/w3-colors-2019.css">
 
     </head>
     <body>
@@ -189,23 +263,12 @@ if (isset($_POST['registerBtn'])) {
         <div>
             <table id="users_table">
                 <thead>
-                    <tr>
-                        <th>Name & Surname</th>
+                    <tr class="w3-container w3-2019-bluestone">
+                        <th>User ID</th>
                         <th>Email<th>
                         <th>Username</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-
-                    </tr>
-                    <tr>
-
-                    </tr>
-                    <tr>
-
-                    </tr>
-                </tbody>
             </table>
         </div>
 

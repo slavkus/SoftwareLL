@@ -91,9 +91,6 @@ h1 {
     font-size: 36px
 }
 
-td {
-    padding: 2%;
-}
 
 /* Login */
 
@@ -219,4 +216,8 @@ button:hover {
 
 .inputRegisterButton:hover{
     background-color: #007AA4;
+}
+
+#users_table {
+    color: black;
 }

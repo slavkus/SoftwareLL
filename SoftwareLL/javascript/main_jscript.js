@@ -2,8 +2,20 @@
 
 $(document).ready(function () {
 
-    $("#users_table").DataTable();
-    
+    $("#users_table").DataTable({
+        "ajax": {
+            "url": "../javascript/users.json",
+            "dataSrc": ""
+        },
+        "bProcessing": true,
+        "bServerSide": true,
+        "aoColumns": [
+            {"mData": "id"},
+            {"mData": "email"},
+            {"mData": "username"},
+        ]
+    });
+
     //All textbox checkup if empty
     $("#inputLoginButton").click(function (event) {
         var filledText = true;
@@ -103,8 +115,6 @@ $(document).ready(function () {
         if (filledText == false || filledPassword == false || filledEmail == false) {
             event.preventDefault();
             alert("Please fill all fields to register.");
-        } else {
-            alert('Thank you for registering!')
         }
     });
 
@@ -155,18 +165,27 @@ window.onclick = function (event) {
     }
 }
 
-function reload () {
-    window.location.replace('http://softwarell.epizy.com/');
+function reload() {
+    //window.location.replace('http://softwarell.epizy.com/');
+    document.location.reload(true);
 }
 
-function showLogout () {
+function showLogout() {
     $("#loginLi").hide();
     $("#registrationLi").hide();
     $("#logoutLi").show();
 }
 
-function showLoginRegistration () {
+function showLoginRegistration() {
     $("#loginLi").show();
     $("#registrationLi").show();
     $("#logoutLi").hide();
+}
+
+function showAdminData() {
+    $("#users_table").show();
+}
+
+function showAdminBlank() {
+    $("#users_table").hide();
 }
