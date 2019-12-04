@@ -149,7 +149,7 @@ if (isset($_POST['registerBtn'])) {
             $query = "INSERT INTO korisnik (ime, prezime, "
                     . "korisnicko_ime, lozinka, email) VALUES ('{$name}','{$surname}','{$username}','{$password}','{$email}')";
             $result = $connection->selectDB($query);
-            
+
             echo "<script type='text/javascript'>"
             . "alert('Thank you for registering!')"
             . "</script>";
@@ -180,6 +180,7 @@ if (isset($_POST['registerBtn'])) {
         <!-- Datatables include -->
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/select/1.3.1/css/select.dataTables.min.css">
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.6.1/js/dataTables.buttons.min.js">
         <link rel="stylesheet" type="text/css" href="https://www.w3schools.com/lib/w3-colors-2019.css">
 
     </head>
@@ -260,16 +261,15 @@ if (isset($_POST['registerBtn'])) {
             </form>
         </div>
 
-        <div>
-            <table id="users_table">
-                <thead>
-                    <tr class="w3-container w3-2019-bluestone">
-                        <th>User ID</th>
-                        <th>Email<th>
-                        <th>Username</th>
-                    </tr>
+        <div style="width: 90%; margin-left: 5%;">
+            <table id="users_table" class="display select" style="width: 100%">
+                <thead class="w3-container w3-2019-bluestone">
                 </thead>
             </table>
+        </div>
+        <div style="margin-left: 5%;">
+            <button class="inputLoginButton" id="deleteUserBtn">Delete</button>
+            <button class="inputLoginButton" id="refreshUserBtn">Refresh</button>
         </div>
 
         <footer class="footer">

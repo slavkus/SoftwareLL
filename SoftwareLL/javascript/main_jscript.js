@@ -2,19 +2,56 @@
 
 $(document).ready(function () {
 
-    $("#users_table").DataTable({
+    var userTable = $("#users_table").DataTable({
         "ajax": {
             "url": "../javascript/users.json",
             "dataSrc": ""
         },
-        "bProcessing": true,
-        "bServerSide": true,
+        //"bProcessing": true, --> commented cus' it seemed redundant, it would disable my sorting, and other features of datatables.net
+        //"bServerSide": true,
         "aoColumns": [
-            {"mData": "id"},
-            {"mData": "email"},
-            {"mData": "username"},
+            {"mData": "id", "title": "User ID"},
+            {"mData": "email", "title": "Email"},
+            {"mData": "username", "title": "Username"}
         ]
+
     });
+    //A bad looking init., but I needed the data, and browser doesn't
+    // recognize a $(this) as a clear object for some reason, so I stored
+    // it into a variable, and row()/rows()/data() functions started working.
+    userTable;
+
+    $("#users_table tbody").on("click", "tr", function () {
+        var data = userTable.row(this).data();
+        if ($(this).hasClass("selected")) {
+            $(this).removeClass("selected");
+        } else {
+            userTable.$("tr.selected").removeClass("selected");
+            $(this).addClass("selected");
+
+            $("#deleteUserBtn").click(function () {
+                console.log(data);
+                $.ajax({
+                    "type": "POST",
+                    "url": "../DB/deleteUser.php",
+                    "data": data,
+                    "success": function (response) {
+                        alert("User deleted " + response);
+                    },
+                    "error": function (exception) {
+                        alert('Exception:', exception);
+                    }
+                });
+
+                userTable.row(".selected").remove().draw(false);
+            });
+        }
+    });
+
+    $("#refreshUserBtn").click(function (){
+       reload(); 
+    });
+
 
     //All textbox checkup if empty
     $("#inputLoginButton").click(function (event) {
