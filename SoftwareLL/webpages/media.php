@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-require 'DB/db.php';
+require '../DB/db.php';
 //Comment when done with sessions
 //echo session_id();
 //echo "<br>";
@@ -30,12 +30,12 @@ if (!empty($_SESSION["user"])) {
         . " showAdminBlank(); });"
         . "</script>";
     }
-   
+    
 } else {
     echo "<script src='javascript/jquery-3.4.1.min.js'></script>"
     . "<script type='text/javascript'>"
     . "$(document).ready(function () {"
-    . " showLoginRegistration();"
+    . " showLoginRegistration(); "
     . " showAdminBlank(); });"
     . "</script>";
     $error = "";
@@ -143,7 +143,7 @@ if (isset($_POST['registerBtn'])) {
 
 <html>
     <head>
-        <title>Home</title>
+        <title>Media</title>
         <meta charset = "UTF-8">
         <meta name = "viewport" content = "width=device-width, initial-scale=1.0">
 
@@ -152,28 +152,38 @@ if (isset($_POST['registerBtn'])) {
         <meta name="keywords" 
               content="license, price, 
               company">
-        <script src="javascript/jquery-3.4.1.min.js"></script>
-        <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+        <script src="../javascript/jquery-3.4.1.min.js"></script>
         <script type="text/javascript" src="../javascript/main_jscript.js"></script>
-
-        <link href="css/main.css" rel="stylesheet" type="text/css">
-        <!-- Datatables include -->
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js" 
+                integrity="sha384-6khuMg9gaYr5AxOqhkVIODVIvm9ynTT5J4V1cfthmT+emCG6yVmEZsRHdxlotUnm" 
+                crossorigin="anonymous">
+        </script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" 
+                integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" 
+                crossorigin="anonymous">
+        </script>
+        <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+        <link href="../css/main.css" rel="stylesheet" type="text/css">
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" 
+              rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" 
+              crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
 
 
     </head>
     <body>
         <header style="font-weight:bold">
-            <h1 id="headerID">Home</h1>
+            <h1 id="headerID">Media</h1>
         </header>
         <nav>
             <ul>
-                <li style="background-color: #007AA4; cursor: pointer;"><a href="">Home</a></li>
-                <li style="cursor: pointer"><a href="webpages/media.php">Media</a></li>
-                <li style="cursor: pointer" id="adminLi"><a href="webpages/administration.php">Administration</a></li>   
+                <li style="cursor: pointer;"><a href="../index.php">Home</a></li>
+                <li style="background-color: #007AA4; cursor: pointer"><a href="">Media</a></li>
+                <li style="cursor: pointer" id="adminLi"><a href="administration.php">Administration</a></li>   
                 <li style="cursor: pointer"><a href="https://github.com/slavkus/SoftwareLL/wiki">Documentation</a></li>
-                <li style="cursor: pointer" id="displayUsername"><a href=""><?php echo $_SESSION["user"]; ?></a></li>
-                <li style="cursor: pointer" id="logoutLi"><a href="DB/logout.php">Logout</a></li>
+                <li style="cursor: pointer" id="displayUsername"><a href=""><?php session_start();
+                        $_SESSION["user"] ?></a></li>
+                <li style="cursor: pointer" id="logoutLi"><a href="../DB/logout.php">Logout</a></li>
                 <li style="cursor: pointer" id="loginLi" class="loginLic" onclick="document.getElementById('modalLoginButton').style.display = 'block'" style="width:auto;"><a>Login</a></li> 
                 <li style="cursor: pointer" id="registrationLi" onclick="document.getElementById('modalRegisterButton').style.display = 'block'" style="width:auto;"><a>Registration</a></li>
 
@@ -241,16 +251,82 @@ if (isset($_POST['registerBtn'])) {
             </form>
         </div>
 
+        <div class="row">
+            <div class="col-md-12">
+
+                <div id="mdb-lightbox-ui"></div>
+
+                <div class="mdb-lightbox">
+
+                    <figure class="col-md-4">
+                        <a href="https://mdbootstrap.com/img/Photos/Lightbox/Original/img%20(145).jpg" data-size="1600x1067">
+                            <img alt="picture" src="https://mdbootstrap.com/img/Photos/Lightbox/Thumbnail/img%20(145).jpg" class="img-fluid">
+                        </a>
+                    </figure>
+
+                    <figure class="col-md-4">
+                        <a href="https://mdbootstrap.com/img/Photos/Lightbox/Original/img%20(150).jpg" data-size="1600x1067">
+                            <img alt="picture" src="https://mdbootstrap.com/img/Photos/Lightbox/Thumbnail/img%20(150).jpg" class="img-fluid" />
+                        </a>
+                    </figure>
+
+                    <figure class="col-md-4">
+                        <a href="https://mdbootstrap.com/img/Photos/Lightbox/Original/img%20(152).jpg" data-size="1600x1067">
+                            <img alt="picture" src="https://mdbootstrap.com/img/Photos/Lightbox/Thumbnail/img%20(152).jpg" class="img-fluid" />
+                        </a>
+                    </figure>
+
+                    <figure class="col-md-4">
+                        <a href="https://mdbootstrap.com/img/Photos/Lightbox/Original/img%20(42).jpg" data-size="1600x1067">
+                            <img alt="picture" src="https://mdbootstrap.com/img/Photos/Lightbox/Thumbnail/img%20(42).jpg" class="img-fluid" />
+                        </a>
+                    </figure>
+
+                    <figure class="col-md-4">
+                        <a href="https://mdbootstrap.com/img/Photos/Lightbox/Original/img%20(151).jpg" data-size="1600x1067">
+                            <img alt="picture" src="https://mdbootstrap.com/img/Photos/Lightbox/Thumbnail/img%20(151).jpg" class="img-fluid" />
+                        </a>
+                    </figure>
+
+                    <figure class="col-md-4">
+                        <a href="https://mdbootstrap.com/img/Photos/Lightbox/Original/img%20(40).jpg" data-size="1600x1067">
+                            <img alt="picture" src="https://mdbootstrap.com/img/Photos/Lightbox/Thumbnail/img%20(40).jpg" class="img-fluid" />
+                        </a>
+                    </figure>
+
+                    <figure class="col-md-4">
+                        <a href="https://mdbootstrap.com/img/Photos/Lightbox/Original/img%20(148).jpg" data-size="1600x1067">
+                            <img alt="picture" src="https://mdbootstrap.com/img/Photos/Lightbox/Thumbnail/img%20(148).jpg" class="img-fluid" />
+                        </a>
+                    </figure>
+
+                    <figure class="col-md-4">
+                        <a href="https://mdbootstrap.com/img/Photos/Lightbox/Original/img%20(147).jpg" data-size="1600x1067">
+                            <img alt="picture" src="https://mdbootstrap.com/img/Photos/Lightbox/Thumbnail/img%20(147).jpg" class="img-fluid" />
+                        </a>
+                    </figure>
+
+                    <figure class="col-md-4">
+                        <a href="https://mdbootstrap.com/img/Photos/Lightbox/Original/img%20(149).jpg" data-size="1600x1067">
+                            <img alt="picture" src="https://mdbootstrap.com/img/Photos/Lightbox/Thumbnail/img%20(149).jpg" class="img-fluid" />
+                        </a>
+                    </figure>
+
+                </div>
+
+            </div>
+        </div>
+
         <footer class="footer">
             <p><strong>Name & Surname: </strong>Ivan Slavko Matić</p>
             <p><strong>Last updated: </strong>Listopad, 2019. </p>
             <address><strong>Email: </strong><a href="mailto:bluebloodslaiver1@gmail.com">bluebloodslaiver1@gmail.com</a></address>
             <figure id="footer">
                 <a href="http://validator.w3.org/#validate_by_uri+with_options">
-                    <img src="multimedia/HTML5.png" 
+                    <img src="../multimedia/HTML5.png" 
                          alt="HTML5 validator" width="50" height="50"></a>
                 <a href="http://jigsaw.w3.org/css-validator/">
-                    <img src="multimedia/CSS3.png" 
+                    <img src="../multimedia/CSS3.png" 
                          alt="CSS validator" width="50" height="50"></a>
             </figure>
         </footer>

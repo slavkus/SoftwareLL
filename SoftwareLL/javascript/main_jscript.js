@@ -48,8 +48,8 @@ $(document).ready(function () {
         }
     });
 
-    $("#refreshUserBtn").click(function (){
-       reload(); 
+    $("#refreshUserBtn").click(function () {
+        reload();
     });
 
 
@@ -211,9 +211,11 @@ function showLogout() {
     $("#loginLi").hide();
     $("#registrationLi").hide();
     $("#logoutLi").show();
+    $("#displayUsername").show();
 }
 
 function showLoginRegistration() {
+    $("#displayUsername").hide();
     $("#loginLi").show();
     $("#registrationLi").show();
     $("#logoutLi").hide();
@@ -221,8 +223,14 @@ function showLoginRegistration() {
 
 function showAdminData() {
     $("#users_table").show();
+    $("#adminLi").show();
 }
 
 function showAdminBlank() {
     $("#users_table").hide();
+    $("#adminLi").hide();
 }
+
+$(function () {
+    $("#mdb-lightbox-ui").load("mdb-addons/mdb-lightbox-ui.html");
+});

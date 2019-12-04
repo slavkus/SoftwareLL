@@ -2,12 +2,12 @@
 session_start();
 require '../DB/db.php';
 
-//Comment when done with sessions
+//Comment when done with sessions, just check ups
 //echo session_id();
 //echo "<br>";
 //echo session_name();
 //echo "<br>";
-echo $_SESSION["user"] . " is now a session user.";
+//echo $_SESSION["user"] . " is now a session user.";
 //echo session_status();
 
 if (!empty($_SESSION["user"])) {
@@ -191,9 +191,10 @@ if (isset($_POST['registerBtn'])) {
         <nav>
             <ul>
                 <li style="cursor: pointer"><a href="../index.php">Home</a></li>
-                <li style="cursor: pointer"><a href="">Gallery</a></li>
-                <li style="background-color: #007AA4; cursor: pointer"><a href="">Administration</a></li>   
-                <li style="cursor: pointer"><a href="">Documentation</a></li>
+                <li style="cursor: pointer"><a href="media.php">Media</a></li>
+                <li style="background-color: #007AA4;cursor: pointer" id="adminLi"><a href="">Administration</a></li>   
+                <li style="cursor: pointer"><a href="https://github.com/slavkus/SoftwareLL/wiki">Documentation</a></li>
+                <li style="cursor: pointer" id="displayUsername"><a href=""><?php echo $_SESSION["user"]; ?></a></li>
                 <li style="cursor: pointer" id="logoutLi"><a href="../DB/logout.php">Logout</a></li>
                 <li style="cursor: pointer" id="loginLi" class="loginLic" onclick="document.getElementById('modalLoginButton').style.display = 'block'" style="width:auto;"><a>Login</a></li> 
                 <li style="cursor: pointer" id="registrationLi" onclick="document.getElementById('modalRegisterButton').style.display = 'block'" style="width:auto;"><a>Registration</a></li>
