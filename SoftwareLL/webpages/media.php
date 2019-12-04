@@ -11,12 +11,12 @@ require '../DB/db.php';
 //echo session_status();
 
 if (!empty($_SESSION["user"])) {
-    echo "<script src='javascript/jquery-3.4.1.min.js'></script>"
+    echo "<script src='../javascript/jquery-3.4.1.min.js'></script>"
     . "<script type='text/javascript'>"
     . "$(document).ready(function () {"
     . " showLogout(); });"
     . "</script>";
-    
+
     if (($_SESSION["type"]) == 4) {
         echo "<script src='../javascript/jquery-3.4.1.min.js'></script>"
         . "<script type='text/javascript'>"
@@ -30,12 +30,11 @@ if (!empty($_SESSION["user"])) {
         . " showAdminBlank(); });"
         . "</script>";
     }
-    
 } else {
-    echo "<script src='javascript/jquery-3.4.1.min.js'></script>"
+    echo "<script src='../javascript/jquery-3.4.1.min.js'></script>"
     . "<script type='text/javascript'>"
     . "$(document).ready(function () {"
-    . " showLoginRegistration(); "
+    . " showLoginRegistration();"
     . " showAdminBlank(); });"
     . "</script>";
     $error = "";
@@ -70,7 +69,7 @@ if (!empty($_SESSION["user"])) {
                 $_SESSION["user"] = $username;
                 $_SESSION["type"] = $type;
                 $ispis = $_SESSION["user"];
-                echo "<script src='javascript/jquery-3.4.1.min.js'></script>"
+                echo "<script src='../javascript/jquery-3.4.1.min.js'></script>"
                 . "<script type='text/javascript'>"
                 . "$(document).ready(function () {"
                 . " showLogout();"
@@ -153,21 +152,15 @@ if (isset($_POST['registerBtn'])) {
               content="license, price, 
               company">
         <script src="../javascript/jquery-3.4.1.min.js"></script>
-        <script type="text/javascript" src="../javascript/main_jscript.js"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js" 
-                integrity="sha384-6khuMg9gaYr5AxOqhkVIODVIvm9ynTT5J4V1cfthmT+emCG6yVmEZsRHdxlotUnm" 
-                crossorigin="anonymous">
-        </script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" 
-                integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" 
-                crossorigin="anonymous">
-        </script>
         <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+        <script type="text/javascript" src="../javascript/main_jscript.js"></script>
+
         <link href="../css/main.css" rel="stylesheet" type="text/css">
-        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" 
-              rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" 
-              crossorigin="anonymous">
+        <!-- Datatables include -->
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/select/1.3.1/css/select.dataTables.min.css">
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.6.1/js/dataTables.buttons.min.js">
+        <link rel="stylesheet" type="text/css" href="https://www.w3schools.com/lib/w3-colors-2019.css">
 
 
     </head>
@@ -181,8 +174,10 @@ if (isset($_POST['registerBtn'])) {
                 <li style="background-color: #007AA4; cursor: pointer"><a href="">Media</a></li>
                 <li style="cursor: pointer" id="adminLi"><a href="administration.php">Administration</a></li>   
                 <li style="cursor: pointer"><a href="https://github.com/slavkus/SoftwareLL/wiki">Documentation</a></li>
-                <li style="cursor: pointer" id="displayUsername"><a href=""><?php session_start();
-                        $_SESSION["user"] ?></a></li>
+                <li style="cursor: pointer" id="displayUsername"><a href=""><?php
+                        session_start();
+                        $_SESSION["user"]
+                        ?></a></li>
                 <li style="cursor: pointer" id="logoutLi"><a href="../DB/logout.php">Logout</a></li>
                 <li style="cursor: pointer" id="loginLi" class="loginLic" onclick="document.getElementById('modalLoginButton').style.display = 'block'" style="width:auto;"><a>Login</a></li> 
                 <li style="cursor: pointer" id="registrationLi" onclick="document.getElementById('modalRegisterButton').style.display = 'block'" style="width:auto;"><a>Registration</a></li>
@@ -245,75 +240,52 @@ if (isset($_POST['registerBtn'])) {
                     <input type="password" maxlength="15" placeholder="Repeat password" name="repeatPassword" id="repeatPassRegister" required>
                     <br><br>
                     <input name="registerBtn" type="submit" value="Register" class="inputRegisterButton" id="inputRegisterButton">&nbsp
-                    <button type="button" onclick="document.getElementById('modalRegisterButton').style.display = 'none'" class="cancelBtn" id="cancelBtn">Cancel</button>
+                    <button type="button" onclick="document.getElementById('modalRegisterButton').style.display = 'none'" class="cancelBtn">Cancel</button>
 
                 </div>
             </form>
         </div>
 
-        <div class="row">
-            <div class="col-md-12">
-
-                <div id="mdb-lightbox-ui"></div>
-
-                <div class="mdb-lightbox">
-
-                    <figure class="col-md-4">
-                        <a href="https://mdbootstrap.com/img/Photos/Lightbox/Original/img%20(145).jpg" data-size="1600x1067">
-                            <img alt="picture" src="https://mdbootstrap.com/img/Photos/Lightbox/Thumbnail/img%20(145).jpg" class="img-fluid">
-                        </a>
-                    </figure>
-
-                    <figure class="col-md-4">
-                        <a href="https://mdbootstrap.com/img/Photos/Lightbox/Original/img%20(150).jpg" data-size="1600x1067">
-                            <img alt="picture" src="https://mdbootstrap.com/img/Photos/Lightbox/Thumbnail/img%20(150).jpg" class="img-fluid" />
-                        </a>
-                    </figure>
-
-                    <figure class="col-md-4">
-                        <a href="https://mdbootstrap.com/img/Photos/Lightbox/Original/img%20(152).jpg" data-size="1600x1067">
-                            <img alt="picture" src="https://mdbootstrap.com/img/Photos/Lightbox/Thumbnail/img%20(152).jpg" class="img-fluid" />
-                        </a>
-                    </figure>
-
-                    <figure class="col-md-4">
-                        <a href="https://mdbootstrap.com/img/Photos/Lightbox/Original/img%20(42).jpg" data-size="1600x1067">
-                            <img alt="picture" src="https://mdbootstrap.com/img/Photos/Lightbox/Thumbnail/img%20(42).jpg" class="img-fluid" />
-                        </a>
-                    </figure>
-
-                    <figure class="col-md-4">
-                        <a href="https://mdbootstrap.com/img/Photos/Lightbox/Original/img%20(151).jpg" data-size="1600x1067">
-                            <img alt="picture" src="https://mdbootstrap.com/img/Photos/Lightbox/Thumbnail/img%20(151).jpg" class="img-fluid" />
-                        </a>
-                    </figure>
-
-                    <figure class="col-md-4">
-                        <a href="https://mdbootstrap.com/img/Photos/Lightbox/Original/img%20(40).jpg" data-size="1600x1067">
-                            <img alt="picture" src="https://mdbootstrap.com/img/Photos/Lightbox/Thumbnail/img%20(40).jpg" class="img-fluid" />
-                        </a>
-                    </figure>
-
-                    <figure class="col-md-4">
-                        <a href="https://mdbootstrap.com/img/Photos/Lightbox/Original/img%20(148).jpg" data-size="1600x1067">
-                            <img alt="picture" src="https://mdbootstrap.com/img/Photos/Lightbox/Thumbnail/img%20(148).jpg" class="img-fluid" />
-                        </a>
-                    </figure>
-
-                    <figure class="col-md-4">
-                        <a href="https://mdbootstrap.com/img/Photos/Lightbox/Original/img%20(147).jpg" data-size="1600x1067">
-                            <img alt="picture" src="https://mdbootstrap.com/img/Photos/Lightbox/Thumbnail/img%20(147).jpg" class="img-fluid" />
-                        </a>
-                    </figure>
-
-                    <figure class="col-md-4">
-                        <a href="https://mdbootstrap.com/img/Photos/Lightbox/Original/img%20(149).jpg" data-size="1600x1067">
-                            <img alt="picture" src="https://mdbootstrap.com/img/Photos/Lightbox/Thumbnail/img%20(149).jpg" class="img-fluid" />
-                        </a>
-                    </figure>
-
-                </div>
-
+        <div class="grid-container">
+            <div class="image-zoom">
+                <figure>
+                    <img src="../multimedia/Absolute_Logo.png" alt="Absolute Logo" width="320" height="240">
+                </figure>
+            </div>
+            <div class="image-zoom">
+                <figure>
+                    <img src="../multimedia/Adobe_Photoshop_Logo.jpg" alt="Adobe Photoshop Logo" width="320" height="240">
+                </figure>
+            </div>
+            <div class="image-zoom">
+                <figure>
+                    <img src="../multimedia/Cloud_Frame_Logo.jpg" alt="Cloud Frame Logo" width="320" height="240">
+                </figure>
+            </div>  
+            <div class="image-zoom">
+                <figure>
+                    <img src="../multimedia/IBM_Logo.jpg" alt="IBM Logo" width="320" height="240">
+                </figure>
+            </div>
+            <div class="image-zoom">
+                <figure>
+                    <img src="../multimedia/Kuanta_The_Software_Factory_Logo.jpg" alt="Kuanta Logo" width="320" height="240">
+                </figure>
+            </div>
+            <div class="image-zoom">
+                <figure>
+                    <img src="../multimedia/Oracle_Logo.png" alt="Oracle Logo" width="320" height="240">
+                </figure>
+            </div>  
+            <div class="image-zoom">
+                <figure>
+                    <img src="../multimedia/Orson_Systems_Logo.png" alt="Orson Systems Logo" width="320" height="240">
+                </figure>
+            </div>
+            <div class="image-zoom">
+                <figure>
+                    <img src="../multimedia/Trialog_Logo.png" alt="Trialog Logo" width="320" height="240">
+                </figure>
             </div>
         </div>
 

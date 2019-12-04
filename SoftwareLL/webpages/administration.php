@@ -222,7 +222,7 @@ if (isset($_POST['registerBtn'])) {
                     <br><br>
                     <input name="loginBtn" type="submit" value="Log in" class="inputLoginButton" id="inputLoginButton">
                     &nbsp
-                    <button type="button" onclick="document.getElementById('modalLoginButton').style.display = 'none'" class="cancelBtn" id="cancelBtn">Cancel</button>
+                    <button type="button" onclick="document.getElementById('modalLoginButton').style.display = 'none'" class="cancelBtn">Cancel</button>
 
                 </div>
             </form>
