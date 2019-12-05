@@ -155,6 +155,16 @@ if (isset($_POST['registerBtn'])) {
         <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
         <script type="text/javascript" src="../javascript/main_jscript.js"></script>
 
+        <!-- Fancybox -->
+        <script type="text/javascript" src="../fancybox/lib/jquery.mousewheel.pack.js"></script>
+        <script type="text/javascript" src="../fancybox/source/jquery.fancybox.pack.js"></script>
+        <script type="text/javascript" src="../fancybox/source/helpers/jquery.fancybox-buttons.js"></script>
+        <script type="text/javascript" src="../fancybox/source/helpers/jquery.fancybox-media.js"></script>
+        <script type="text/javascript" src="../fancybox/source/helpers/jquery.fancybox-thumbs.js"></script>
+
+        <link rel="stylesheet" href="../fancybox/source/jquery.fancybox.css" type="text/css" media="screen" />
+        <link rel="stylesheet" href="../fancybox/source/helpers/jquery.fancybox-thumbs.css" type="text/css" media="screen" />
+
         <link href="../css/main.css" rel="stylesheet" type="text/css">
         <!-- Datatables include -->
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
@@ -246,47 +256,31 @@ if (isset($_POST['registerBtn'])) {
             </form>
         </div>
 
-        <div class="grid-container">
-            <div class="image-zoom">
-                <figure>
-                    <img src="../multimedia/Absolute_Logo.png" alt="Absolute Logo" width="320" height="240">
-                </figure>
-            </div>
-            <div class="image-zoom">
-                <figure>
-                    <img src="../multimedia/Adobe_Photoshop_Logo.jpg" alt="Adobe Photoshop Logo" width="320" height="240">
-                </figure>
-            </div>
-            <div class="image-zoom">
-                <figure>
-                    <img src="../multimedia/Cloud_Frame_Logo.jpg" alt="Cloud Frame Logo" width="320" height="240">
-                </figure>
-            </div>  
-            <div class="image-zoom">
-                <figure>
-                    <img src="../multimedia/IBM_Logo.jpg" alt="IBM Logo" width="320" height="240">
-                </figure>
-            </div>
-            <div class="image-zoom">
-                <figure>
-                    <img src="../multimedia/Kuanta_The_Software_Factory_Logo.jpg" alt="Kuanta Logo" width="320" height="240">
-                </figure>
-            </div>
-            <div class="image-zoom">
-                <figure>
-                    <img src="../multimedia/Oracle_Logo.png" alt="Oracle Logo" width="320" height="240">
-                </figure>
-            </div>  
-            <div class="image-zoom">
-                <figure>
-                    <img src="../multimedia/Orson_Systems_Logo.png" alt="Orson Systems Logo" width="320" height="240">
-                </figure>
-            </div>
-            <div class="image-zoom">
-                <figure>
-                    <img src="../multimedia/Trialog_Logo.png" alt="Trialog Logo" width="320" height="240">
-                </figure>
-            </div>
+        <div>
+            <a class="fancybox-button image-zoom" rel="fancybox-button" href="../multimedia/Absolute_Logo.png" title="Absolute Logo">
+                <img src="../multimedia/Absolute_Logo.png" width="320" height="240" alt="" />
+            </a>
+            <a class="fancybox-button image-zoom" rel="fancybox-button" href="../multimedia/Adobe_Photoshop_Logo.jpg" title="Adobe Photoshop Logo">
+                <img src="../multimedia/Adobe_Photoshop_Logo.jpg" width="320" height="240" alt="" />
+            </a>
+            <a class="fancybox-button image-zoom" rel="fancybox-button" href="../multimedia/Cloud_Frame_Logo.jpg" title="Cloud Frame Logo">
+                <img src="../multimedia/Cloud_Frame_Logo.jpg" width="320" height="240" alt="" />
+            </a>
+            <a class="fancybox-button image-zoom" rel="fancybox-button" href="../multimedia/IBM_Logo.jpg" title="IBM Logo">
+                <img src="../multimedia/IBM_Logo.jpg" width="320" height="240" alt="" />
+            </a>
+            <a class="fancybox-button image-zoom" rel="fancybox-button" href="../multimedia/Kuanta_The_Software_Factory_Logo.jpg" title="Kuanta Logo">
+                <img src="../multimedia/Kuanta_The_Software_Factory_Logo.jpg" width="320" height="240" alt="" />
+            </a>
+            <a class="fancybox-button image-zoom" rel="fancybox-button" href="../multimedia/Oracle_Logo.png" title="Oracle Logo">
+                <img src="../multimedia/Oracle_Logo.png" width="320" height="240" alt="" />
+            </a>
+            <a class="fancybox-button image-zoom" rel="fancybox-button" href="../multimedia/Orson_Systems_Logo.png" title="Orson Systems Logo">
+                <img src="../multimedia/Orson_Systems_Logo.png" width="320" height="240" alt="" />
+            </a>
+            <a class="fancybox-button image-zoom" rel="fancybox-button" href="../multimedia/Trialog_Logo.png" title="Trialog Logo">
+                <img src="../multimedia/Trialog_Logo.png" width="320" height="240" alt="" />
+            </a>
         </div>
 
         <footer class="footer">

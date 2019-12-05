@@ -226,8 +226,7 @@ button:hover {
     color: black;
 }
 
-/* Media */
-
+/* Media - Going with grid, css only version
 .grid-container {
     display: grid;
     width: 90%;
@@ -235,19 +234,17 @@ button:hover {
     grid-template-columns: auto auto auto;
 }
 
-/* [1] The container */
+*/
+
 .image-zoom {
-  height: 300px; /* [1.1] Set it as per your need */
-  /*overflow: hidden; /* [1.2] Hide the overflowing of child elements */
+  height: 300px;
 }
 
-/* [2] Transition property for smooth transformation of images */
 .image-zoom img {
   transition: transform .5s ease;
 }
 
-/* [3] Finally, transforming the image when container gets hovered */
 .image-zoom:hover img {
-  transform: scale(1.5);
+  transform: scale(1.1);
 }
 
