@@ -175,6 +175,16 @@ if (isset($_POST['registerBtn'])) {
         <script src="../javascript/jquery-3.4.1.min.js"></script>
         <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
         <script type="text/javascript" src="../javascript/main_jscript.js"></script>
+        
+        <!-- Fancybox -->
+        <script type="text/javascript" src="../fancybox/lib/jquery.mousewheel.pack.js"></script>
+        <script type="text/javascript" src="../fancybox/source/jquery.fancybox.pack.js"></script>
+        <script type="text/javascript" src="../fancybox/source/helpers/jquery.fancybox-buttons.js"></script>
+        <script type="text/javascript" src="../fancybox/source/helpers/jquery.fancybox-media.js"></script>
+        <script type="text/javascript" src="../fancybox/source/helpers/jquery.fancybox-thumbs.js"></script>
+
+        <link rel="stylesheet" href="../fancybox/source/jquery.fancybox.css" type="text/css" media="screen" />
+        <link rel="stylesheet" href="../fancybox/source/helpers/jquery.fancybox-thumbs.css" type="text/css" media="screen" />
 
         <link href="../css/main.css" rel="stylesheet" type="text/css">
         <!-- Datatables include -->
