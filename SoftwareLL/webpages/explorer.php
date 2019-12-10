@@ -1,8 +1,8 @@
 <?php
 session_start();
+require '../DB/db.php';
 
-require 'DB/db.php';
-//Comment when done with sessions
+//Comment when done with sessions, just check ups
 //echo session_id();
 //echo "<br>";
 //echo session_name();
@@ -11,28 +11,47 @@ require 'DB/db.php';
 //echo session_status();
 
 if (!empty($_SESSION["user"])) {
-    echo "<script src='javascript/jquery-3.4.1.min.js'></script>"
+    echo "<script src='../javascript/jquery-3.4.1.min.js'></script>"
     . "<script type='text/javascript'>"
     . "$(document).ready(function () {"
     . " showLogout(); });"
     . "</script>";
-    
+
     if (($_SESSION["type"]) == 4) {
         echo "<script src='../javascript/jquery-3.4.1.min.js'></script>"
         . "<script type='text/javascript'>"
         . "$(document).ready(function () {"
         . " showAdminData(); });"
         . "</script>";
+
+        $connection = new DB();
+        $connection->connectDB();
+
+        $query = "SELECT id_korisnik, email, korisnicko_ime FROM korisnik";
+        $result = $connection->selectDB($query);
+
+        $data = array();
+
+        while ($row = mysqli_fetch_array($result)) {
+            $id = $row['id_korisnik'];
+            $email = $row['email'];
+            $user = $row['korisnicko_ime'];
+            $data[] = array('id' => $id, 'email' => $email, 'username' => $user);
+        }
+
+        $fp = fopen('../javascript/users.json', 'w');
+        fwrite($fp, json_encode($data));
+        fclose($fp);
     } else {
         echo "<script src='../javascript/jquery-3.4.1.min.js'></script>"
         . "<script type='text/javascript'>"
         . "$(document).ready(function () {"
         . " showAdminBlank(); });"
+        . "alert('Content locked. Please log in as administrator.');"
         . "</script>";
     }
-   
 } else {
-    echo "<script src='javascript/jquery-3.4.1.min.js'></script>"
+    echo "<script src='../javascript/jquery-3.4.1.min.js'></script>"
     . "<script type='text/javascript'>"
     . "$(document).ready(function () {"
     . " showLoginRegistration();"
@@ -70,7 +89,7 @@ if (!empty($_SESSION["user"])) {
                 $_SESSION["user"] = $username;
                 $_SESSION["type"] = $type;
                 $ispis = $_SESSION["user"];
-                echo "<script src='javascript/jquery-3.4.1.min.js'></script>"
+                echo "<script src='../javascript/jquery-3.4.1.min.js'></script>"
                 . "<script type='text/javascript'>"
                 . "$(document).ready(function () {"
                 . " showLogout();"
@@ -139,55 +158,58 @@ if (isset($_POST['registerBtn'])) {
     }
 }
 ?>
+
 <!DOCTYPE html>
 
 <html>
     <head>
-        <title>Home</title>
+        <title>Explorer</title>
         <meta charset = "UTF-8">
         <meta name = "viewport" content = "width=device-width, initial-scale=1.0">
 
-        <meta name="title" content="SoftwareLL">
+        <meta name="title" content="Explorer">
         <meta name="author" content="Ivan Slavko Matić">
         <meta name="keywords" 
-              content="license, price, 
+              content="administrator, user, registered user, moderator, 
               company">
-        <script src="javascript/jquery-3.4.1.min.js"></script>
+        <script src="../javascript/jquery-3.4.1.min.js"></script>
         <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
         <script type="text/javascript" src="../javascript/main_jscript.js"></script>
+        <script type="text/javascript" src="../javascript/skyrim_explorer.js"></script>
         
         <!-- Fancybox -->
-        <script type="text/javascript" src="fancybox/lib/jquery.mousewheel.pack.js"></script>
-        <script type="text/javascript" src="fancybox/source/jquery.fancybox.pack.js"></script>
-        <script type="text/javascript" src="fancybox/source/helpers/jquery.fancybox-buttons.js"></script>
-        <script type="text/javascript" src="fancybox/source/helpers/jquery.fancybox-media.js"></script>
-        <script type="text/javascript" src="fancybox/source/helpers/jquery.fancybox-thumbs.js"></script>
+        <script type="text/javascript" src="../fancybox/lib/jquery.mousewheel.pack.js"></script>
+        <script type="text/javascript" src="../fancybox/source/jquery.fancybox.pack.js"></script>
+        <script type="text/javascript" src="../fancybox/source/helpers/jquery.fancybox-buttons.js"></script>
+        <script type="text/javascript" src="../fancybox/source/helpers/jquery.fancybox-media.js"></script>
+        <script type="text/javascript" src="../fancybox/source/helpers/jquery.fancybox-thumbs.js"></script>
 
-        <link rel="stylesheet" href="fancybox/source/jquery.fancybox.css" type="text/css" media="screen" />
-        <link rel="stylesheet" href="fancybox/source/helpers/jquery.fancybox-thumbs.css" type="text/css" media="screen" />
-        
-        <link href="css/main.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="../fancybox/source/jquery.fancybox.css" type="text/css" media="screen" />
+        <link rel="stylesheet" href="../fancybox/source/helpers/jquery.fancybox-thumbs.css" type="text/css" media="screen" />
+
+        <link href="../css/skyrim_explorer.css" rel="stylesheet" type="text/css">
         <!-- Datatables include -->
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
-
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/select/1.3.1/css/select.dataTables.min.css">
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.6.1/js/dataTables.buttons.min.js">
+        <link rel="stylesheet" type="text/css" href="https://www.w3schools.com/lib/w3-colors-2019.css">
 
     </head>
     <body>
         <header style="font-weight:bold">
-            <h1 id="headerID">Home</h1>
+            <h1 id="headerID">Skyrim Explorer</h1>
         </header>
         <nav>
             <ul>
-                <li style="background-color: #007AA4; cursor: pointer;"><a href="">Home</a></li>
-                <li style="cursor: pointer"><a href="webpages/media.php">Media</a></li>
-                <li style="cursor: pointer"><a href="webpages/explorer.php">Explorer</a></li>
-                <li style="cursor: pointer" id="adminLi"><a href="webpages/administration.php">Administration</a></li>   
+                <li style="cursor: pointer"><a href="../index.php">Home</a></li>
+                <li style="cursor: pointer"><a href="media.php">Media</a></li>
+                <li style="background-color: #007AA4; cursor: pointer"><a href="">Explorer</a></li>
+                <li style="cursor: pointer" id="adminLi"><a href="">Administration</a></li>   
                 <li style="cursor: pointer"><a href="https://github.com/slavkus/SoftwareLL/wiki">Documentation</a></li>
                 <li style="cursor: pointer" id="displayUsername"><a href=""><?php echo $_SESSION["user"]; ?></a></li>
-                <li style="cursor: pointer" id="logoutLi"><a href="DB/logout.php">Logout</a></li>
+                <li style="cursor: pointer" id="logoutLi"><a href="../DB/logout.php">Logout</a></li>
                 <li style="cursor: pointer" id="loginLi" class="loginLic" onclick="document.getElementById('modalLoginButton').style.display = 'block'" style="width:auto;"><a>Login</a></li> 
                 <li style="cursor: pointer" id="registrationLi" onclick="document.getElementById('modalRegisterButton').style.display = 'block'" style="width:auto;"><a>Registration</a></li>
-
             </ul>
             <hr>
         </nav>
@@ -217,6 +239,8 @@ if (isset($_POST['registerBtn'])) {
                 </div>
             </form>
         </div>
+        
+        
 
         <!-- Registration form -->
 
@@ -252,16 +276,18 @@ if (isset($_POST['registerBtn'])) {
             </form>
         </div>
 
+        
+        
         <footer class="footer">
             <p><strong>Name & Surname: </strong>Ivan Slavko Matić</p>
             <p><strong>Last updated: </strong>Listopad, 2019. </p>
             <address><strong>Email: </strong><a href="mailto:bluebloodslaiver1@gmail.com">bluebloodslaiver1@gmail.com</a></address>
             <figure id="footer">
                 <a href="http://validator.w3.org/#validate_by_uri+with_options">
-                    <img src="multimedia/HTML5.png" 
+                    <img src="../multimedia/HTML5.png" 
                          alt="HTML5 validator" width="50" height="50"></a>
                 <a href="http://jigsaw.w3.org/css-validator/">
-                    <img src="multimedia/CSS3.png" 
+                    <img src="../multimedia/CSS3.png" 
                          alt="CSS validator" width="50" height="50"></a>
             </figure>
         </footer>

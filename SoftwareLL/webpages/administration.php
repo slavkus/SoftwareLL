@@ -202,6 +202,7 @@ if (isset($_POST['registerBtn'])) {
             <ul>
                 <li style="cursor: pointer"><a href="../index.php">Home</a></li>
                 <li style="cursor: pointer"><a href="media.php">Media</a></li>
+                <li style="cursor: pointer"><a href="explorer.php">Explorer</a></li>
                 <li style="background-color: #007AA4;cursor: pointer" id="adminLi"><a href="">Administration</a></li>   
                 <li style="cursor: pointer"><a href="https://github.com/slavkus/SoftwareLL/wiki">Documentation</a></li>
                 <li style="cursor: pointer" id="displayUsername"><a href=""><?php echo $_SESSION["user"]; ?></a></li>
