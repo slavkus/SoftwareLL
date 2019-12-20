@@ -173,16 +173,15 @@ if (isset($_POST['registerBtn'])) {
               content="administrator, user, registered user, moderator, 
               company">
         <script src="../javascript/jquery-3.4.1.min.js"></script>
-        <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
-        <script type="text/javascript" src="../javascript/main_jscript.js"></script>
-        <script type="text/javascript" src="../javascript/skyrim_explorer.js"></script>
-        
+        <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+        <script src="../javascript/skyrim_explorer.js"></script>
+
         <!-- Fancybox -->
-        <script type="text/javascript" src="../fancybox/lib/jquery.mousewheel.pack.js"></script>
-        <script type="text/javascript" src="../fancybox/source/jquery.fancybox.pack.js"></script>
-        <script type="text/javascript" src="../fancybox/source/helpers/jquery.fancybox-buttons.js"></script>
-        <script type="text/javascript" src="../fancybox/source/helpers/jquery.fancybox-media.js"></script>
-        <script type="text/javascript" src="../fancybox/source/helpers/jquery.fancybox-thumbs.js"></script>
+        <script src="../fancybox/lib/jquery.mousewheel.pack.js"></script>
+        <script src="../fancybox/source/jquery.fancybox.pack.js"></script>
+        <script src="../fancybox/source/helpers/jquery.fancybox-buttons.js"></script>
+        <script src="../fancybox/source/helpers/jquery.fancybox-media.js"></script>
+        <script src="../fancybox/source/helpers/jquery.fancybox-thumbs.js"></script>
 
         <link rel="stylesheet" href="../fancybox/source/jquery.fancybox.css" type="text/css" media="screen" />
         <link rel="stylesheet" href="../fancybox/source/helpers/jquery.fancybox-thumbs.css" type="text/css" media="screen" />
@@ -196,22 +195,37 @@ if (isset($_POST['registerBtn'])) {
 
     </head>
     <body>
-        <header style="font-weight:bold">
-            <h1 id="headerID">Skyrim Explorer</h1>
+        <header>
         </header>
         <nav>
-            <ul>
-                <li style="cursor: pointer"><a href="../index.php">Home</a></li>
-                <li style="cursor: pointer"><a href="media.php">Media</a></li>
-                <li style="background-color: #007AA4; cursor: pointer"><a href="">Explorer</a></li>
-                <li style="cursor: pointer" id="adminLi"><a href="">Administration</a></li>   
-                <li style="cursor: pointer"><a href="https://github.com/slavkus/SoftwareLL/wiki">Documentation</a></li>
-                <li style="cursor: pointer" id="displayUsername"><a href=""><?php echo $_SESSION["user"]; ?></a></li>
-                <li style="cursor: pointer" id="logoutLi"><a href="../DB/logout.php">Logout</a></li>
-                <li style="cursor: pointer" id="loginLi" class="loginLic" onclick="document.getElementById('modalLoginButton').style.display = 'block'" style="width:auto;"><a>Login</a></li> 
-                <li style="cursor: pointer" id="registrationLi" onclick="document.getElementById('modalRegisterButton').style.display = 'block'" style="width:auto;"><a>Registration</a></li>
+            <ul id="menu">
+                <li><a href="../index.php">Home</a></li>
+                <li>
+                    <a>Sign In</a>
+                    <ul>
+                        <li id="logoutLi"><a href="../DB/logout.php">Logout</a></li>
+                        <li id="loginLi" class="loginLic" onclick="document
+                                        .getElementById('modalLoginButton').style.display = 'block'" 
+                            style="width:auto;"><a>Login</a>
+                        </li>
+                        <li id="registrationLi" onclick="document
+                                        .getElementById('modalRegisterButton')
+                                        .style.display = 'block'" style="width:auto;">
+                            <a>Registration</a>
+                        </li>
+                    </ul>
+                </li>
+                <li><a href="https://github.com/slavkus/SoftwareLL/wiki">Documentation</a></li>
+
+                <li>
+                    <a>Webpages</a>
+                    <ul>
+                        <li><a href="media.php">Media</a></li>
+                        <li><a href="">Explorer</a></li>
+                        <li id="adminLi"><a href="administration.php">Administration</a></li>
+                    </ul>
+                </li>
             </ul>
-            <hr>
         </nav>
 
         <!-- Login form -->
@@ -233,14 +247,13 @@ if (isset($_POST['registerBtn'])) {
                     <input type="checkbox" checked="checked" name="rememberMeCheckbox">
                     <br><br>
                     <input name="loginBtn" type="submit" value="Log in" class="inputLoginButton" id="inputLoginButton">
-                    &nbsp
+                    &nbsp;
                     <button type="button" onclick="document.getElementById('modalLoginButton').style.display = 'none'" class="cancelBtn">Cancel</button>
-
                 </div>
             </form>
         </div>
-        
-        
+
+
 
         <!-- Registration form -->
 
@@ -266,30 +279,43 @@ if (isset($_POST['registerBtn'])) {
                     <label for="passwordRegister" style="color: gray;"><b>Password</b></label>
                     <input type="password" maxlength="15" placeholder="Password" name="passwordRegister" id="passwordRegister" required>
 
-                    <label for="repeatPassword" style="color: gray;"><b>Repeat password</b></label>
+                    <label for="repeatPassRegister" style="color: gray;"><b>Repeat password</b></label>
                     <input type="password" maxlength="15" placeholder="Repeat password" name="repeatPassword" id="repeatPassRegister" required>
                     <br><br>
-                    <input name="registerBtn" type="submit" value="Register" class="inputRegisterButton" id="inputRegisterButton">&nbsp
+                    <input name="registerBtn" type="submit" value="Register" class="inputRegisterButton" id="inputRegisterButton">&nbsp;
                     <button type="button" onclick="document.getElementById('modalRegisterButton').style.display = 'none'" class="cancelBtn" id="cancelBtn">Cancel</button>
 
                 </div>
             </form>
         </div>
+        <!--
+        <div id="iframeLoader">
+            <iframe src="http://www.google.co.in" name="targetframe" allowTransparency="true" scrolling="no" frameborder="0" >
+            </iframe>
+        </div>
+        -->
+        <div class="container">
+            <div class="explorerContent"><img src="../skyrim_source/skypickerAssembly.png" alt="Skyrim Picker"
+                                              <!-- usemap="#categorySelector" --></div>
 
-        
-        
-        <footer class="footer">
-            <p><strong>Name & Surname: </strong>Ivan Slavko Matić</p>
-            <p><strong>Last updated: </strong>Listopad, 2019. </p>
-            <address><strong>Email: </strong><a href="mailto:bluebloodslaiver1@gmail.com">bluebloodslaiver1@gmail.com</a></address>
-            <figure id="footer">
-                <a href="http://validator.w3.org/#validate_by_uri+with_options">
-                    <img src="../multimedia/HTML5.png" 
-                         alt="HTML5 validator" width="50" height="50"></a>
-                <a href="http://jigsaw.w3.org/css-validator/">
-                    <img src="../multimedia/CSS3.png" 
-                         alt="CSS validator" width="50" height="50"></a>
-            </figure>
-        </footer>
+            <!--<map name="categorySelector">
+                <area shape="rect" coords="0,0,82,126" href="sun.htm" alt="Sun">
+                <area shape="rect" coords="90,58,3" href="mercur.htm" alt="Mercury">
+                <area shape="rect" coords="124,58,8" href="venus.htm" alt="Venus">
+                <area shape="rect" coords="0,0,82,126" href="sun.htm" alt="Sun">
+                <area shape="rect" coords="90,58,3" href="mercur.htm" alt="Mercury">
+                <area shape="rect" coords="124,58,8" href="venus.htm" alt="Venus">
+            </map>-->
+            <div class="explorerInner rotate"><img src="../skyrim_source/esoCircle.png" alt="Skyrim Picker"></div>
+
+
+            <!-- https://css-tricks.com/the-many-ways-to-link-up-shapes-and-images-with-html-and-css/ -->
+
+            <div class="backgroundButtons">
+                <button id="btnChooseBackground">Static Background</button>
+                <button id="btnAutoBackground">Auto Background</button>
+            </div>
+        </div>
+
     </body>
 </html>

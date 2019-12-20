@@ -15,95 +15,280 @@ body {
     transition: background 1s;
 }
 
-header {
-    padding: 1%;
-    margin-left: 1.5%; 
-}
 
-ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: #004870;
-}
 
-li {
-    float: left;
-    display: inline-block;
-    color: white;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-    font-size: 18px;
-}
 
-li:nth-child(5){
-    float: right;
-}
 
-li:nth-child(6){
-    float: right;
-}
-
-li:nth-child(7){
-    float: right;
-}
-
-li:nth-child(8){
-    float: right;
-}
-
-li:hover{
-    background-color: #007AA4;
+header { 
+    background-image: url("../skyrim_source/skyrim_title.png");
+    -webkit-background-size: contain;
+    -moz-background-size: contain;
+    -o-background-size: contain;
+    background-size: contain;
+    height: 20%;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-color: rgba(0, 0, 0, 0.2);
+    filter: brightness(50%);
 }
 
 nav {
-    margin-top: 1%;
-    width: 100%;
+    margin-top: 0.3%;
 }
 
-a {
+/* Grid setup */
+
+.container {
+    display: grid;
+    grid-template-columns: [buttons1] 12% [rest] auto [buttons2] 12%;
+    grid-template-rows: [content] auto [bottom] 5%;
+}
+
+.explorerContent {
+    grid-column-start: rest;
+    grid-row-start: content;
+    
+    align-self: center;
+    justify-self: center;
+    
+}
+
+.explorerInner {
+    grid-column-start: rest;
+    grid-row-start: content;
+    
+    align-self: center;
+    justify-self: center;
+    
+    margin-bottom: 3%;
+    margin-right: 2%;
+    
+    z-index: 1;
+}
+
+.backgroundButtons {
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-column-gap: 3%;
+    grid-column-start: buttons1;
+    grid-row-start: bottom;
+     
+}
+
+#btnAutoBackground, #btnChooseBackground {
+    background-color: #5E5A59;
+    opacity: 0.7;
+    border: none;
+    cursor: pointer;
     color: white;
+}
+
+#btnAutoBackground:hover, #btnChooseBackground:hover {
+    opacity: 1.0;
+}
+
+.rotate {
+  animation: rotation 40s infinite linear;
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ******************************* */
+
+/* Settings for navigation bar taken from https://catalin.red/css3-dropdown-menu/ */
+
+#menu {
+    width: 100%;
+    margin: 0;
+    padding: 10px 0 0 0;
+    list-style: none;  
+    background: #111;
+    background: -moz-linear-gradient(#444, #111); 
+    background: -webkit-gradient(linear,left bottom,left top,color-stop(0, #111),color-stop(1, #444));	
+    background: -webkit-linear-gradient(#444, #111);	
+    background: -o-linear-gradient(#444, #111);
+    background: -ms-linear-gradient(#444, #111);
+    background: linear-gradient(#444, #111);
+    -moz-border-radius: 50px;
+    border-radius: 50px;
+    -moz-box-shadow: 0 2px 1px #9c9c9c;
+    -webkit-box-shadow: 0 2px 1px #9c9c9c;
+    box-shadow: 0 2px 1px #9c9c9c;
+}
+
+#menu li {
+    float: left;
+    padding: 0 0 10px 0;
+    position: relative;
+    line-height: 0;
+}
+
+#menu a 
+{
+    float: left;
+    height: 25px;
+    padding: 0 25px;
+    color: #999;
+    text-transform: uppercase;
+    font: bold 12px/25px Arial, Helvetica;
     text-decoration: none;
+    text-shadow: 0 1px 0 #000;
 }
 
-a:visited {
-    color: white;
+#menu li:hover > a {
+    color: #fafafa;
 }
 
-a:unvisited {
-    color: white;
+#menu li:hover > ul {
+    display: block;
 }
 
-figcaption {
-    text-align: center;
-}
-
-.footer {
-    margin-top: 25%;
+/* Sub-menu */
+#menu ul
+{
+    list-style: none;
+    margin: 0;
+    padding: 0;    
+    display: none;
+    position: absolute;
+    top: 35px;
     left: 0;
-    bottom: 0;
-    width: 100%;
-    color: white;
-    text-align: center;
+    z-index: 99999;    
+    background: #444;
+    background: -moz-linear-gradient(#444, #111);
+    background: -webkit-gradient(linear,left bottom,left top,color-stop(0, #111),color-stop(1, #444));
+    background: -webkit-linear-gradient(#444, #111);    
+    background: -o-linear-gradient(#444, #111);	
+    background: -ms-linear-gradient(#444, #111);	
+    background: linear-gradient(#444, #111);
+    -moz-box-shadow: 0 0 2px rgba(255,255,255,.5);
+    -webkit-box-shadow: 0 0 2px rgba(255,255,255,.5);
+    box-shadow: 0 0 2px rgba(255,255,255,.5);	
+    -moz-border-radius: 5px;
+    border-radius: 5px;
 }
 
-#footer {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row; 
-    justify-content: center;
+#menu ul ul
+{
+    top: 0;
+    left: 150px;
 }
 
-h1 {
-    color: white;
-    text-align: left;
-    margin-left: 10px;
-    font-family: Rockwell; 
-    font-size: 36px
+#menu ul li
+{
+    float: none;
+    margin: 0;
+    padding: 0;
+    display: block;  
+    -moz-box-shadow: 0 1px 0 #111111, 0 2px 0 #777777;
+    -webkit-box-shadow: 0 1px 0 #111111, 0 2px 0 #777777;
+    box-shadow: 0 1px 0 #111111, 0 2px 0 #777777;
 }
 
+#menu ul li:last-child
+{   
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;    
+}
+
+#menu ul a
+{    
+    padding: 10px;
+    height: 10px;
+    width: 130px;
+    height: auto;
+    line-height: 1;
+    display: block;
+    white-space: nowrap;
+    float: none;
+    text-transform: none;
+}
+
+*:first-child+html #menu ul a /* IE7 */
+{    
+    height: 10px;
+}
+
+#menu ul a:hover
+{
+    background: #0186ba;
+    background: -moz-linear-gradient(#04acec,  #0186ba);	
+    background: -webkit-gradient(linear, left top, left bottom, from(#04acec), to(#0186ba));
+    background: -webkit-linear-gradient(#04acec,  #0186ba);
+    background: -o-linear-gradient(#04acec,  #0186ba);
+    background: -ms-linear-gradient(#04acec,  #0186ba);
+    background: linear-gradient(#04acec,  #0186ba);
+}
+
+#menu ul li:first-child > a
+{
+    -moz-border-radius: 5px 5px 0 0;
+    border-radius: 5px 5px 0 0;
+}
+
+#menu ul li:first-child > a:after
+{
+    content: '';
+    position: absolute;
+    left: 30px;
+    top: -8px;
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-bottom: 8px solid #444;
+}
+
+#menu ul ul li:first-child a:after
+{
+    left: -8px;
+    top: 12px;
+    width: 0;
+    height: 0;
+    border-left: 0;	
+    border-bottom: 5px solid transparent;
+    border-top: 5px solid transparent;
+    border-right: 8px solid #444;
+}
+
+#menu ul li:first-child a:hover:after
+{
+    border-bottom-color: #04acec; 
+}
+
+#menu ul ul li:first-child a:hover:after
+{
+    border-right-color: #04acec; 
+    border-bottom-color: transparent; 	
+}
+
+
+#menu ul li:last-child > a
+{
+    -moz-border-radius: 0 0 5px 5px;
+    border-radius: 0 0 5px 5px;
+}
+
+/* Clear floated elements */
+#menu:after 
+{
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: " ";
+    clear: both;
+    height: 0;
+}
+
+/* ******************* */
 
 /* Login */
 
@@ -114,18 +299,6 @@ input[type=text], input[type=password], input[type=email]  {
     display: inline-block;
     border: 1px solid #ccc;
     box-sizing: border-box;
-}
-
-button {
-    background-color: #004870;
-    color: white;
-    padding: 14px 16px;
-    border: none;
-    cursor: pointer;
-}
-
-button:hover {
-    background-color: #007AA4;
 }
 
 .inputLoginButton{ 
@@ -231,28 +404,3 @@ button:hover {
     background-color: #007AA4;
 }
 
-#users_table {
-    color: black;
-}
-
-/* Media - Going with grid, css only version
-.grid-container {
-    display: grid;
-    width: 90%;
-    margin-left: 10%;
-    grid-template-columns: auto auto auto;
-}
-
-*/
-
-.image-zoom {
-    height: 300px;
-}
-
-.image-zoom img {
-    transition: transform .5s ease;
-}
-
-.image-zoom:hover img {
-    transform: scale(1.1);
-}
